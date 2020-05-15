@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPG vs WebP</title>
+    <style>
+        html,
+        body {
+            text-align: center;
+            background-color: #000
+        }
+        
+        * {
+            box-sizing: border-box
+        }
+        
+        #box {
+            display: inline-block;
+            text-align: center
+        }
+        
+        h1,
+        h2,
+        h3 {
+            color: #fff
+        }
+        
+        .title {
+            color: #ffd466
+        }
+        
+        .ba-slider {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ba-slider img {
+            width: 100%;
+            display: block;
+        }
+        
+        .resize {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+        }
+        
+        .handle {
+            /* Thin line seperator */
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            margin-left: -2px;
+            background: rgba(0, 0, 0, 0.5);
+            cursor: ew-resize;
+        }
+        
+        .handle:after {
+            /* Big orange knob  */
+            position: absolute;
+            top: 50%;
+            width: 64px;
+            height: 64px;
+            margin: -32px 0 0 -32px;
+            content: '\21d4';
+            color: white;
+            font-weight: bold;
+            font-size: 36px;
+            text-align: center;
+            line-height: 64px;
+            background: #ffb800;
+            /* @orange */
+            border: 1px solid #e6a600;
+            /* darken(@orange, 5%) */
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.5), inset 0 60px 50px -30px #ffd466;
+            /* lighten(@orange, 20%)*/
+        }
+        
+        .draggable:after {
+            width: 48px;
+            height: 48px;
+            margin: -24px 0 0 -24px;
+            line-height: 48px;
+            font-size: 30px;
+        }
+        
+        .navbar {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #ABCDEF;
+            margin-bottom: 5px;
+        }
+        
+        ul.nav {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            height: 36px;
+            line-height: 36px;
+            background: #fff;
+            /* you can change the backgorund color here. */
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 13px;
+            list-style-type: none;
+            /*to remove bullets*/
+            text-align: center;
+            /* zoom:1; */
+            overflow: hidden;
+        }
+        
+        ul.nav li {
+            border-right: 1px solid #fff;
+            /* you can change the border color matching to your background color */
+            float: left;
+            padding: 2px;
+            width: 110px;
+            display: inline-block;
+        }
+        
+        ul.nav a {
+            display: block;
+            padding: 0 28px;
+            color: #000;
+            text-decoration: none;
+        }
+        
+        ul.nav a:hover,
+        ul.nav li.current a {
+            background: #ffd466;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Drag right to see JPG, Left to see WebP (Quality 75%)</h1>
+    <div id="box">
+        <p class="title"><label id="webpsize">0Kb</label> | <label id="jpegsize">0Kb</label></p>
+        <div class="navbar">
+            <ul class="nav"></ul>
+        </div>
+        <div class="ba-slider">
+            <img src="./src/career-guidance.webp" id="webp" title="WebP" alt="WebP">
+            <div class="resize">
+                <img src="./src/career-guidance.jpg" id="jpeg" title="JPG" alt="JPG">
+            </div>
+            <span class="handle"></span>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script>
+            var navbar = '';
+            var _images = ["resume-builder-mob", "resume-builder_1", "online-tutor", "online-tutor_0", "online-tests", "online-test", "learn-eng", "learn-eng_0", "internship", "internship_0", "career-guidance", "career-guidance_0"];
+            _images.forEach(function(name, index) {
+                navbar += '<li><a href="?image=' + index + '">' + index + '</a></li>'
+            });
+
+            function getFileSize(url) {
+                var fileSize = '';
+                var http = new XMLHttpRequest();
+                http.open('HEAD', url, false);
+                http.send(null);
+                if (http.status === 200) {
+                    fileSize = http.getResponseHeader('content-length');
+                    console.log('fileSize=' + fileSize)
+                }
+                return fileSize
+            }
+
+            function buildVsBox(name) {
+                document.getElementById('webp').src = './src/' + name + '.webp';
+                document.getElementById('jpeg').src = './src/' + name + '.jpg'
+            }
+
+            function QS(variable) {
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) {
+                        return pair[1]
+                    }
+                }
+                return (false)
+            }
+            // Call & init
+            $(document).ready(function() {
+                $('.nav').html(navbar);
+                if (QS('image')) {
+                    var q = QS('image');
+                    buildVsBox(_images[q]);
+                    document.getElementById('webpsize').innerText = 'WebP - ' + Math.floor(getFileSize('./src/' + _images[q] + '.webp') / 1024) + ' Kb';
+                    document.getElementById('jpegsize').innerText = 'JPG - ' + Math.floor(getFileSize('./src/' + _images[q] + '.jpg') / 1024) + ' Kb';
+                }
+
+                $('.ba-slider').each(function() {
+                    var cur = $(this);
+                    // Adjust the slider
+                    var width = cur.width() + 'px';
+                    cur.find('.resize img').css('width', width);
+                    // Bind dragging events
+                    drags(cur.find('.handle'), cur.find('.resize'), cur);
+                });
+            });
+            // Update sliders on resize. 
+            // Because we all do this: i.imgur.com/YkbaV.gif
+            $(window).resize(function() {
+                $('.ba-slider').each(function() {
+                    var cur = $(this);
+                    var width = cur.width() + 'px';
+                    cur.find('.resize img').css('width', width);
+                });
+            });
+
+            function drags(dragElement, resizeElement, container) {
+                // Initialize the dragging event on mousedown.
+                dragElement.on('mousedown touchstart', function(e) {
+                    dragElement.addClass('draggable');
+                    resizeElement.addClass('resizable');
+                    // Check if it's a mouse or touch event and pass along the correct value
+                    var startX = (e.pageX) ? e.pageX : e.originalEvent.touches[0].pageX;
+                    // Get the initial position
+                    var dragWidth = dragElement.outerWidth(),
+                        posX = dragElement.offset().left + dragWidth - startX,
+                        containerOffset = container.offset().left,
+                        containerWidth = container.outerWidth();
+                    // Set limits
+                    minLeft = containerOffset + 10;
+                    maxLeft = containerOffset + containerWidth - dragWidth - 10;
+                    // Calculate the dragging distance on mousemove.
+                    dragElement.parents().on("mousemove touchmove", function(e) {
+                        // Check if it's a mouse or touch event and pass along the correct value
+                        var moveX = (e.pageX) ? e.pageX : e.originalEvent.touches[0].pageX;
+                        leftValue = moveX + posX - dragWidth;
+                        // Prevent going off limits
+                        if (leftValue < minLeft) {
+                            leftValue = minLeft;
+                        } else if (leftValue > maxLeft) {
+                            leftValue = maxLeft;
+                        }
+                        // Translate the handle's left value to masked divs width.
+                        widthValue = (leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth + '%';
+                        // Set the new values for the slider and the handle. 
+                        // Bind mouseup events to stop dragging.
+                        $('.draggable').css('left', widthValue).on('mouseup touchend touchcancel', function() {
+                            $(this).removeClass('draggable');
+                            resizeElement.removeClass('resizable');
+                        });
+                        $('.resizable').css('width', widthValue);
+                    }).on('mouseup touchend touchcancel', function() {
+                        dragElement.removeClass('draggable');
+                        resizeElement.removeClass('resizable');
+                    });
+                    e.preventDefault();
+                }).on('mouseup touchend touchcancel', function(e) {
+                    dragElement.removeClass('draggable');
+                    resizeElement.removeClass('resizable');
+                });
+            }
+        </script>
+</body>
+
+</html>

@@ -40,7 +40,8 @@
         
         h1,
         h2,
-        h3 {
+        h3,
+        h4 {
             color: #fff
         }
         
@@ -97,7 +98,10 @@
 </head>
 
 <body>
-    <h1>Drag right to see JPG, Left to see WebP (Quality 75%)</h1>
+    <h3>Drag right to see JPG, Left to see WebP (Quality 75%)</h3>
+    <a href="https://neerajsinghsonu.github.io">
+        <h4>Click to visit home</h4>
+    </a>
     <div id="box">
         <p class="title"><label id="webpsize">0Kb</label> | <label id="jpegsize">0Kb</label></p>
         <div class="navbar">
@@ -111,59 +115,58 @@
             </div>
         </div>
 
-     
-        <!-- Bottom of body -->
-        <script src="https://unpkg.com/beerslider/dist/BeerSlider.js"></script>
+    </div>
+    <!-- Bottom of body -->
+    <script src="https://unpkg.com/beerslider/dist/BeerSlider.js"></script>
 
-        <script>
-            var navbar = '';
-            var _images = ["resume-builder-mob", "resume-builder_1", "online-tutor", "online-tutor_0", "online-tests", "online-test", "learn-eng", "learn-eng_0", "internship", "internship_0", "career-guidance", "career-guidance_0"];
-            _images.forEach(function(name, index) {
-                navbar += '<li><a href="?image=' + index + '">' + index + '</a></li>'
-            });
-            //new BeerSlider(document.getElementById('slider'));
+    <script>
+        var navbar = '';
+        var _images = ["resume-builder-mob", "resume-builder_1", "online-tutor", "online-tutor_0", "online-tests", "online-test", "learn-eng", "learn-eng_0", "internship", "internship_0", "career-guidance", "career-guidance_0"];
+        _images.forEach(function(name, index) {
+            navbar += '<li><a href="?image=' + index + '">' + index + '</a></li>'
+        });
+        //new BeerSlider(document.getElementById('slider'));
 
-            function getFileSize(url) {
-                var fileSize = '';
-                var http = new XMLHttpRequest();
-                http.open('HEAD', url, false);
-                http.send(null);
-                if (http.status === 200) {
-                    fileSize = http.getResponseHeader('content-length');
-                    console.log('fileSize=' + fileSize)
+        function getFileSize(url) {
+            var fileSize = '';
+            var http = new XMLHttpRequest();
+            http.open('HEAD', url, false);
+            http.send(null);
+            if (http.status === 200) {
+                fileSize = http.getResponseHeader('content-length');
+                console.log('fileSize=' + fileSize)
+            }
+            return fileSize
+        }
+
+        function buildVsBox(name) {
+            document.getElementById('webp').src = './src/' + name + '.webp';
+            document.getElementById('jpeg').src = './src/' + name + '.jpg'
+        }
+
+        function QS(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) {
+                    return pair[1]
                 }
-                return fileSize
             }
+            return (false)
+        }
 
-            function buildVsBox(name) {
-                document.getElementById('webp').src = './src/' + name + '.webp';
-                document.getElementById('jpeg').src = './src/' + name + '.jpg'
-            }
-
-            function QS(variable) {
-                var query = window.location.search.substring(1);
-                var vars = query.split("&");
-                for (var i = 0; i < vars.length; i++) {
-                    var pair = vars[i].split("=");
-                    if (pair[0] == variable) {
-                        return pair[1]
-                    }
-                }
-                return (false)
-            }
-
-            document.getElementsByClassName('nav')[0].innerHTML = navbar;
-                if (QS('image')) {
-                        var q = QS('image');
-                        buildVsBox(_images[q]);
-                        document.getElementById('webpsize').innerText = 'WebP - ' + Math.floor(getFileSize('./src/' + _images[q] + '.webp') / 1024) + ' Kb';
-                        document.getElementById('jpegsize').innerText = 'JPG - ' + Math.floor(getFileSize('./src/' + _images[q] + '.jpg') / 1024) + ' Kb';
-                     setTimeout(() => {
-                       new BeerSlider(document.getElementById('slider'));
-                    }, 500);
-                    }
-            
-        </script>
+        document.getElementsByClassName('nav')[0].innerHTML = navbar;
+        if (QS('image')) {
+            var q = QS('image');
+            buildVsBox(_images[q]);
+            document.getElementById('webpsize').innerText = 'WebP - ' + Math.floor(getFileSize('./src/' + _images[q] + '.webp') / 1024) + ' Kb';
+            document.getElementById('jpegsize').innerText = 'JPG - ' + Math.floor(getFileSize('./src/' + _images[q] + '.jpg') / 1024) + ' Kb';
+            setTimeout(() => {
+                new BeerSlider(document.getElementById('slider'));
+            }, 500);
+        }
+    </script>
 </body>
 
 </html>

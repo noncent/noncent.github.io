@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example that shows off a blog page with a list of posts.">
+    <title>Web Dev, What's new in Lighthouse 6.0</title>
+    <link rel="stylesheet" href="../dist/css/pure-min.css">
+    <link rel="stylesheet" href="../dist/css/grids-responsive-min.css">
+    <link rel="stylesheet" href="../dist/layouts/blog.css">
+</head>
+
+<body>
+    <div id="layout" class="pure-g">
+        <div class="sidebar pure-u-1 pure-u-md-1-4">
+            <div class="header">
+                <h1 class="brand-title">Lighhouse 6.0</h1>
+                <h2 class="brand-tagline">20 May 2020</h2>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a class="pure-button" target="_new" href="https://web.dev/lighthouse-whats-new-6.0/">web.dev</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="pure-button" target="_new" href="https://web.dev/measure/">Measure</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="content pure-u-1 pure-u-md-3-4">
+            <div>
+                <!-- A wrapper for all the blog posts -->
+                <div class="posts">
+                    <h1 class="content-subhead">Pinned Post</h1>
+                    <!-- A single blog post -->
+                    <section class="post">
+                        <header class="post-header">
+                            <img width="48" height="48" alt="Neeraj Singh" class="post-avatar" src="../dist/img/profile.jpg">
+                            <h2 class="post-title">What's New in Lighthouse 6.0</h2>
+                            <p class="post-meta">
+                                By <a href="#" class="post-author">Neeraj Singh</a> under <a class="post-category post-category-design" href="#">Website</a> <a class="post-category post-category-pure" href="#">Page Speed</a>
+                            </p>
+                        </header>
+                        <div class="post-description">
+                            <p>
+                                -- Extracted from main web.dev source: <br/> Today we're releasing Lighthouse 6.0! Lighthouse is an automated website auditing tool that helps developers with opportunities and diagnostics to improve the user experience of their
+                                sites. It's available in Chrome DevTools, npm (as a Node module and a CLI), or as a browser extension (in Chrome and Firefox). It powers many Google services, including web.dev/measure and PageSpeed Insights. Lighthouse
+                                6.0 is available immediately on npm and in Chrome Canary. Other Google services that leverage Lighthouse will get the update by the end of the month. It will land in Chrome Stable in Chrome 84 (mid-July). I will update
+                                this content later, <br/>All thanks goes to <a target="_new" href="https://web.dev/lighthouse-whats-new-6.0/">Web.dev</a> | <a href="https://purecss.io/">Pure CSS </a> | <a href="https://app.diagrams.net/">Draw.io</a>
+                            </p>
+                            <div class="post-images pure-g">
+                                <div class="pure-u-1 pure-u-md-1-1">
+                                    <a target="_new" href="./lighthouse.svg">
+                                        <embed alt="Understand the concept in picture mode" class="pure-img-responsive" src="./lighthouse.svg">
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="footer">
+                    <div class="pure-menu pure-menu-horizontal">
+                        <ul>
+                            <li class="pure-menu-item"><a target="_new" href="http://purecss.io/" class="pure-menu-link">About</a>
+                            </li>
+                            <li class="pure-menu-item"><a target="_new" href="https://twitter.com/tweetsonkaushik" class="pure-menu-link">Twitter</a></li>
+                            <li class="pure-menu-item"><a target="_new" href="https://neerajsinghsonu.github.io/" class="pure-menu-link">GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

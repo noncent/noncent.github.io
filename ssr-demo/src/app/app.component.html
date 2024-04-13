@@ -1,0 +1,18 @@
+<div *ngIf="posts">
+  <div class="card-container">
+    <div class="card" *ngFor="let category of posts.onlineTestMasterCategoryDetails">
+      <img class="card-image" [src]="category.masterCategoryImageUrl" [alt]="category.masterCategoryImageUrl_alt">
+      <div class="card-content">
+        <h2 class="card-title">{{ category.categoryName }}</h2>
+        <div class="sub-categories">
+          <div class="sub-category" *ngFor="let subCategory of category.onlineTestSubCategoryDetails">
+            <h3>{{ subCategory.subCategoryName }}</h3>
+            <p>Test Count: {{ subCategory.subCategoryTestCount }}</p>
+            <p>Partner: {{ subCategory.subCategoryPartnerName }}</p>
+          </div>
+        </div>
+      </div>
+      <a class="card-link" [href]="category.amp_url">Take Test</a>
+    </div>
+  </div>
+</div>

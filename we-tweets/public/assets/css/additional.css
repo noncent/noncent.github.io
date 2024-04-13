@@ -1,0 +1,50 @@
+.breadcrumbs ul.breadcrumb {
+    padding: 10px 10px;
+    list-style: none;
+    background-color: #FFF;
+}
+
+.breadcrumbs ul.breadcrumb li {
+    display: inline;
+    font-size: 14px;
+}
+
+.breadcrumbs ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: #c7c7c7;
+    content: ">>";
+}
+
+.breadcrumbs ul.breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+}
+
+.breadcrumbs ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: none;
+}
+
+.card-body.fluid {
+    padding: 0;
+    width: 100%
+}
+
+.text-normal {
+    color: #000;
+    text-decoration: none;
+    outline: none;
+}
+
+.text-normal:hover {
+    text-decoration: none;
+    outline: none; 
+}
+
+.text-blue {
+    color: #1b63d0
+}
+
+.hide {
+    display: none
+}

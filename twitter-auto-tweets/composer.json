@@ -1,0 +1,12 @@
+{
+    "name": "neesingh/auto-complaints",
+    "authors": [
+        {
+            "name": "Neeraj Singh",
+            "email": "1378886+neerajsinghsonu@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "j7mbo/twitter-api-php": "^1.0"
+    }
+}

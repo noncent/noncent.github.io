@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <script>
     (function () {
       try {
@@ -81,19 +81,19 @@
     </div>
     <div class="pillars reveal-stagger">
       <article class="pillar" style="--i:0">
-        <div class="pillar-icon">&#x1F916;</div>
+        <div class="pillar-icon-wrap"><svg class="pillar-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11V7M8 7h8M9 15h.01M15 15h.01M8 3h8v4H8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
         <h3>AI &amp; Bots</h3>
         <p>Conversational agents, speech interfaces, prompt libraries, and sales automation powered by modern LLMs.</p>
       </article>
       <article class="pillar" style="--i:1">
-        <div class="pillar-icon">&#x26A1;</div>
+        <div class="pillar-icon-wrap"><svg class="pillar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>DevOps &amp; Tools</h3>
         <p>Page-speed auditors, disk analyzers, host managers, and developer cheat sheets that save hours daily.</p>
       </article>
       <article class="pillar" style="--i:2">
-        <div class="pillar-icon">&#x1F4E6;</div>
+        <div class="pillar-icon-wrap"><svg class="pillar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 9.4l-9-5.19M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16zM3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>Open Source</h3>
-        <p>46 public repositories — PHP, JavaScript, Swift, Rust, and more. Fork, star, or steal shamelessly.</p>
+        <p><span id="pillar-repo-count">46</span> public repositories — PHP, JavaScript, Swift, Rust, and more. Fork, star, or steal shamelessly.</p>
       </article>
     </div>
   </section>
@@ -145,6 +145,7 @@
       </div>
       <div id="chips" class="chips" role="tablist" aria-label="Filter by category"></div>
     </div>
+    <p id="repo-count" class="repo-count" aria-live="polite"></p>
     <div id="grid" class="repo-grid reveal-stagger" role="list"></div>
     <div id="empty" class="empty hidden"><p>No repositories match that filter.</p></div>
   </section>
@@ -165,6 +166,7 @@
     <p>&copy; noncent · synced from GitHub · <a href="https://github.com/noncent/noncent.github.io" target="_blank" rel="noopener">source</a></p>
   </footer>
 
-  <script src="app.js?v=3"></script>
+  <script src="icons.js?v=4"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

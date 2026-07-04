@@ -1,12 +1,16 @@
 (function () {
   "use strict";
 
+  const FEATURED = ["promptvault", "discope", "bruos", "developers-cheat-sheet"];
+
   const els = {
     search: document.getElementById("search"),
     chips: document.getElementById("chips"),
     grid: document.getElementById("grid"),
     bento: document.getElementById("bento"),
     empty: document.getElementById("empty"),
+    repoCount: document.getElementById("repo-count"),
+    pillarRepoCount: document.getElementById("pillar-repo-count"),
     themeToggle: document.getElementById("theme-toggle"),
     siteNav: document.getElementById("site-nav"),
     statRepos: document.getElementById("stat-repos"),
@@ -20,6 +24,7 @@
   let activeFilter = "All";
   let countersDone = false;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const icons = window.NONCENT_ICONS;
 
   function escapeHtml(s) {
     return String(s)
@@ -47,8 +52,32 @@
     return new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
   }
 
+  function isFeatured(repo) {
+    return FEATURED.includes(repo.name);
+  }
+
   function extSvg() {
     return '<svg class="repo-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>';
+  }
+
+  function montageHtml(repo, variant) {
+    const fb = escapeHtml(repo.fallback || repo.cover);
+    const main = escapeHtml(repo.cover);
+    const m = repo.montage || [];
+    const a = escapeHtml(m[0] || repo.cover);
+    const b = escapeHtml(m[1] || repo.cover);
+    const cls = variant === "bento" ? "card-montage card-montage--bento" : "card-montage";
+    return `
+      <div class="${cls}" aria-hidden="true">
+        <img class="montage-main" src="${main}" alt="" loading="lazy" data-fallback="${fb}" />
+        <img class="montage-tile montage-tile--a" src="${a}" alt="" loading="lazy" data-fallback="${fb}" />
+        <img class="montage-tile montage-tile--b" src="${b}" alt="" loading="lazy" data-fallback="${fb}" />
+      </div>`;
+  }
+
+  function categoryCount(cat) {
+    if (cat === "All") return DATA.repos.length;
+    return DATA.repos.filter((r) => r.category === cat).length;
   }
 
   /* ---- render ---- */
@@ -56,10 +85,11 @@
     const cats = [...new Set(DATA.repos.map((r) => r.category))].sort();
     const items = [{ key: "All", label: "All" }, ...cats.map((c) => ({ key: c, label: c }))];
     els.chips.innerHTML = items
-      .map(
-        ({ key, label }) =>
-          `<button class="chip${activeFilter === key ? " active" : ""}" type="button" data-filter="${escapeHtml(key)}">${escapeHtml(label)}</button>`
-      )
+      .map(({ key, label }) => {
+        const count = categoryCount(key);
+        const chipIcon = icons ? icons.categoryIcon(key === "All" ? "default" : key) : "";
+        return `<button class="chip${activeFilter === key ? " active" : ""}" type="button" data-filter="${escapeHtml(key)}">${chipIcon}<span>${escapeHtml(label)} (${count})</span></button>`;
+      })
       .join("");
   }
 
@@ -70,8 +100,6 @@
 
   function scoreRepo(repo, query) {
     if (!matchesFilter(repo)) return null;
-    const featured = ["promptvault", "discope", "bruos", "developers-cheat-sheet"];
-    if (featured.includes(repo.name)) return null;
     if (!query) return { repo, score: 1 };
     const name = fuzzy(query, repo.name);
     const desc = fuzzy(query, repo.description);
@@ -83,10 +111,27 @@
     };
   }
 
+  function updateRepoCount(shown, total, filter, query) {
+    if (!els.repoCount) return;
+    let text;
+    if (query && filter !== "All") {
+      text = `Showing ${shown} of ${total} · ${filter} · matching "${query}"`;
+    } else if (query) {
+      text = `Showing ${shown} of ${total} · matching "${query}"`;
+    } else if (filter !== "All") {
+      text = `Showing ${shown} of ${total} · ${filter}`;
+    } else if (shown === total) {
+      text = `${total} public repositories`;
+    } else {
+      text = `Showing ${shown} of ${total}`;
+    }
+    els.repoCount.textContent = text;
+  }
+
   function bentoCard(repo, cls) {
     return `
-      <a class="bento-card ${cls || ""}" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--i:${0}">
-        <img class="bento-cover" src="${escapeHtml(repo.cover)}" alt="" loading="lazy" />
+      <a class="bento-card ${cls || ""}" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--i:0">
+        ${montageHtml(repo, "bento")}
         <div class="bento-overlay"></div>
         <div class="bento-body">
           <div class="bento-tag">${escapeHtml(repo.category)}</div>
@@ -107,21 +152,26 @@
       html += bentoCard(r, i === 0 ? "bento-card--wide" : "");
     });
     els.bento.innerHTML = html;
+    initImageFallbacks(els.bento);
     initCardTilt(els.bento.querySelectorAll(".bento-card"));
   }
 
   function repoCard(repo, index) {
+    const starBadge = isFeatured(repo) && icons
+      ? `<span class="badge badge--featured">${icons.icon("star", "badge-star")} Featured</span>`
+      : isFeatured(repo)
+        ? `<span class="badge badge--featured">Featured</span>`
+        : "";
     return `
       <a class="repo-card" role="listitem" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--i:${index}">
-        <div class="repo-cover-wrap">
-          <img class="repo-cover" src="${escapeHtml(repo.cover)}" alt="" loading="lazy" />
-        </div>
+        ${montageHtml(repo, "repo")}
         <div class="repo-body">
           <div class="repo-head">
             <h3 class="repo-name">${escapeHtml(repo.name)}</h3>
             ${extSvg()}
           </div>
           <div class="repo-badges">
+            ${starBadge}
             ${repo.language ? `<span class="badge badge--lang">${escapeHtml(repo.language)}</span>` : ""}
             <span class="badge">${escapeHtml(repo.category)}</span>
           </div>
@@ -140,11 +190,25 @@
 
     els.grid.innerHTML = results.map((r, i) => repoCard(r.repo, i)).join("");
     els.empty.classList.toggle("hidden", results.length > 0);
+    updateRepoCount(results.length, DATA.stats.total, activeFilter, query);
+    initImageFallbacks(els.grid);
     initCardTilt(els.grid.querySelectorAll(".repo-card"));
   }
 
   function render() {
     renderGrid();
+  }
+
+  function initImageFallbacks(root) {
+    if (!root) return;
+    root.querySelectorAll("img[data-fallback]").forEach((img) => {
+      img.addEventListener("error", function onErr() {
+        if (this.dataset.fallback && this.src !== this.dataset.fallback) {
+          this.src = this.dataset.fallback;
+        }
+        this.removeEventListener("error", onErr);
+      }, { once: true });
+    });
   }
 
   /* ---- scroll reveal ---- */
@@ -285,6 +349,7 @@
     .then((r) => r.json())
     .then((json) => {
       DATA = json;
+      if (els.pillarRepoCount) els.pillarRepoCount.textContent = DATA.stats.total;
       renderChips();
       renderBento();
       render();

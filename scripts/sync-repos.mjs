@@ -7,22 +7,11 @@ import { execSync } from "node:child_process";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { pickImages } from "./image-pools.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const root = join(__dir, "..");
 const outPath = join(root, "data", "repos.json");
-
-const COVERS = {
-  ai: "assets/covers/ai-tools.png",
-  devtools: "assets/covers/devtools.png",
-  php: "assets/covers/php.png",
-  javascript: "assets/covers/javascript.png",
-  security: "assets/covers/security.png",
-  mobile: "assets/covers/mobile.png",
-  rust: "assets/covers/rust.png",
-  social: "assets/covers/social.png",
-  default: "assets/covers/default.png",
-};
 
 function categorize(name, desc, lang) {
   const n = name.toLowerCase();
@@ -53,12 +42,15 @@ const rows = runGh().filter((r) => !r.isPrivate);
 const repos = rows.map((r) => {
   const lang = r.primaryLanguage?.name || null;
   const category = categorize(r.name, r.description, lang);
+  const images = pickImages(category, r.name);
   return {
     name: r.name,
     description: r.description || "",
     language: lang,
     category,
-    cover: COVERS[category] || COVERS.default,
+    cover: images.cover,
+    montage: images.montage,
+    fallback: images.fallback,
     url: r.url,
     updatedAt: r.updatedAt,
   };

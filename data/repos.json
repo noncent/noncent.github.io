@@ -1,0 +1,521 @@
+{
+  "generatedAt": "2026-07-04T16:16:21.586Z",
+  "owner": "noncent",
+  "stats": {
+    "public": 46,
+    "private": 5,
+    "total": 51
+  },
+  "repos": [
+    {
+      "name": "promptvault",
+      "private": false,
+      "description": "",
+      "language": "JavaScript",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/promptvault",
+      "updatedAt": "2026-07-04T16:00:07Z"
+    },
+    {
+      "name": "instagram-data-scraper",
+      "private": false,
+      "description": "Instagram Data Scraper, Instagram Web Scraper, Instagram Super Scraper is a PHP script which takes @user-name or #keywords as input and returns all information related to user or hash-tags e.g. likes, comments, post count, images, likes on images etc...  You can search @account information and #hash-tag simultaneously by using space separated words in search box jQuery is using to build the Awesome View, to handle each and every request separately. I hope you like this small chunk of code  All code is well commented to understand the flow and functionality, if I missed something or any improvement/suggestion you have, kindly let me know..",
+      "language": "PHP",
+      "category": "social",
+      "cover": "assets/covers/social.png",
+      "url": "https://github.com/noncent/instagram-data-scraper",
+      "updatedAt": "2026-06-29T09:31:52Z"
+    },
+    {
+      "name": "htaccess-best-web-security-practices",
+      "private": false,
+      "description": "Hi Folks, This is the htaccess settings to use within your application. No one can assure you that any Settings could make an Application 100% Safe. But we can make it much.. much.. much tedious & hard to break.... :) So let them work...",
+      "language": null,
+      "category": "security",
+      "cover": "assets/covers/security.png",
+      "url": "https://github.com/noncent/htaccess-best-web-security-practices",
+      "updatedAt": "2026-06-22T07:38:51Z"
+    },
+    {
+      "name": "salesiq",
+      "private": true,
+      "description": "This is an AI SALES bot",
+      "language": "JavaScript",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/salesiq",
+      "updatedAt": "2026-05-26T09:54:38Z"
+    },
+    {
+      "name": "aira",
+      "private": true,
+      "description": "This is an AI reserveation bot",
+      "language": null,
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/aira",
+      "updatedAt": "2026-05-09T16:25:07Z"
+    },
+    {
+      "name": "bulk-page-speed",
+      "private": true,
+      "description": "Bulk Google PageSpeed Insights testing tool to analyze multiple URLs at scale using Lighthouse. Track Core Web Vitals (LCP, CLS, INP), crawl links, compare before-after performance, and export reports in CSV. Supports cron automation, retries, and detailed monitoring for SEO and DevOps teams.",
+      "language": "JavaScript",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/bulk-page-speed",
+      "updatedAt": "2026-04-19T10:34:06Z"
+    },
+    {
+      "name": "developers-cheat-sheet",
+      "private": false,
+      "description": "Daily use commands for developers and system administrators",
+      "language": "PHP",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/developers-cheat-sheet",
+      "updatedAt": "2026-03-03T12:02:29Z"
+    },
+    {
+      "name": "bruos",
+      "private": false,
+      "description": "A modern, native macOS application for bulk file renaming with an intuitive 3-pane interface. Built with SwiftUI for a native macOS experience.",
+      "language": "Swift",
+      "category": "mobile",
+      "cover": "assets/covers/mobile.png",
+      "url": "https://github.com/noncent/bruos",
+      "updatedAt": "2026-03-02T14:32:59Z"
+    },
+    {
+      "name": "windows-host-entry-manager",
+      "private": false,
+      "description": "Window Host Manager is windows batch file to add entries in host file",
+      "language": "Batchfile",
+      "category": "devtools",
+      "cover": "assets/covers/devtools.png",
+      "url": "https://github.com/noncent/windows-host-entry-manager",
+      "updatedAt": "2025-11-21T02:35:53Z"
+    },
+    {
+      "name": "mysql-find-replace-php",
+      "private": false,
+      "description": "Find and Replace in entire MySQL database as PHP script, PHP Class",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/mysql-find-replace-php",
+      "updatedAt": "2025-11-09T05:48:24Z"
+    },
+    {
+      "name": "nono",
+      "private": false,
+      "description": "A curated collection of everyday developer solutions — commands, troubleshooting tips, productivity hacks, and best practices. From quick terminal snippets to in-depth fixes, this repo is your go-to reference for solving real-world coding and DevOps challenges.",
+      "language": null,
+      "category": "default",
+      "cover": "assets/covers/default.png",
+      "url": "https://github.com/noncent/nono",
+      "updatedAt": "2025-08-19T07:50:54Z"
+    },
+    {
+      "name": "discope",
+      "private": false,
+      "description": "Discope is a powerful and intuitive storage analysis tool designed to help you reclaim valuable space on your HDDs, SSDs, and external drives. Whether you're battling low disk space or just want to understand where your data lives, Discope delivers fast, visual insights that make managing your storage simple and efficient.",
+      "language": "Rust",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/discope",
+      "updatedAt": "2025-08-14T21:42:24Z"
+    },
+    {
+      "name": "swat-kats-poc",
+      "private": true,
+      "description": "This is the private repo for all my poc.",
+      "language": "HTML",
+      "category": "default",
+      "cover": "assets/covers/default.png",
+      "url": "https://github.com/noncent/swat-kats-poc",
+      "updatedAt": "2025-06-13T08:31:54Z"
+    },
+    {
+      "name": "crypto",
+      "private": false,
+      "description": "Encrypt text messages with Advanced Encryption Standard on Web.",
+      "language": "HTML",
+      "category": "security",
+      "cover": "assets/covers/security.png",
+      "url": "https://github.com/noncent/crypto",
+      "updatedAt": "2024-09-30T11:07:30Z"
+    },
+    {
+      "name": "twitter-hashtag-gallery",
+      "private": false,
+      "description": "Twitter Hash Tag Gallery is a simple jQuery plugin to get twitter #hashtag and @refrences written in jQuery and PHP. It is original created by Tom (http://www.webdevdoor.com/javascript-ajax/custom-twitter-feed-integration-jquery/) and I have updated script as a jQuery plugin with some new feature.",
+      "language": "PHP",
+      "category": "social",
+      "cover": "assets/covers/social.png",
+      "url": "https://github.com/noncent/twitter-hashtag-gallery",
+      "updatedAt": "2024-04-13T20:55:26Z"
+    },
+    {
+      "name": "noncent.github.io",
+      "private": false,
+      "description": "Github website",
+      "language": "HTML",
+      "category": "default",
+      "cover": "assets/covers/default.png",
+      "url": "https://github.com/noncent/noncent.github.io",
+      "updatedAt": "2024-04-13T20:39:23Z"
+    },
+    {
+      "name": "twitter-auto-tweets",
+      "private": false,
+      "description": "TwitterAutoTweets is a PHP script that helps you to post a tweet randomly based on your tweet collection. You can add as many as you want tweets and the later script will pick one random tweet and will post it on your timeline.",
+      "language": "PHP",
+      "category": "social",
+      "cover": "assets/covers/social.png",
+      "url": "https://github.com/noncent/twitter-auto-tweets",
+      "updatedAt": "2024-04-13T20:23:53Z"
+    },
+    {
+      "name": "bot-browser",
+      "private": false,
+      "description": "botbrowser is small Angular 11.1.2 sample project to run Angular SSR on AWS S3 + Lambda@Edge with CloudFront",
+      "language": "TypeScript",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/bot-browser",
+      "updatedAt": "2024-04-13T20:23:36Z"
+    },
+    {
+      "name": "we-tweet",
+      "private": true,
+      "description": "WeTweet CMS Panel & Dashboard",
+      "language": "PHP",
+      "category": "social",
+      "cover": "assets/covers/social.png",
+      "url": "https://github.com/noncent/we-tweet",
+      "updatedAt": "2024-04-13T20:23:27Z"
+    },
+    {
+      "name": "poc",
+      "private": false,
+      "description": "This is repo to host all sample apps and pocs",
+      "language": "JavaScript",
+      "category": "javascript",
+      "cover": "assets/covers/javascript.png",
+      "url": "https://github.com/noncent/poc",
+      "updatedAt": "2024-03-17T06:07:05Z"
+    },
+    {
+      "name": "ssr-demo",
+      "private": false,
+      "description": "Angular SSR Demo",
+      "language": "TypeScript",
+      "category": "javascript",
+      "cover": "assets/covers/javascript.png",
+      "url": "https://github.com/noncent/ssr-demo",
+      "updatedAt": "2023-06-06T15:14:11Z"
+    },
+    {
+      "name": "noncent",
+      "private": false,
+      "description": "My profile README.md",
+      "language": null,
+      "category": "default",
+      "cover": "assets/covers/default.png",
+      "url": "https://github.com/noncent/noncent",
+      "updatedAt": "2023-06-04T11:18:54Z"
+    },
+    {
+      "name": "Alexa-PHP-Endpoint",
+      "private": false,
+      "description": "A library for handling Alexa skill requests in PHP",
+      "language": "PHP",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/Alexa-PHP-Endpoint",
+      "updatedAt": "2023-01-16T08:19:49Z"
+    },
+    {
+      "name": "pdo_class_wrapper",
+      "private": false,
+      "description": "A Class for PDO Wrapper",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/pdo_class_wrapper",
+      "updatedAt": "2022-11-14T18:09:28Z"
+    },
+    {
+      "name": "wampserver-ssl-auto-config",
+      "private": false,
+      "description": "WampServer SSL Auto Config is a Microsoft Windows batch script designed to automatically generate and configure a fully working Apache SSL / Name Based virtual host development environment.",
+      "language": "Batchfile",
+      "category": "devtools",
+      "cover": "assets/covers/devtools.png",
+      "url": "https://github.com/noncent/wampserver-ssl-auto-config",
+      "updatedAt": "2022-07-31T20:24:53Z"
+    },
+    {
+      "name": "jQuery.escapeHtml",
+      "private": false,
+      "description": "jQuery.escapeHtml(), is a jQuery plugin that removes special characters from user input and make them XSS safe.",
+      "language": "JavaScript",
+      "category": "security",
+      "cover": "assets/covers/security.png",
+      "url": "https://github.com/noncent/jQuery.escapeHtml",
+      "updatedAt": "2022-05-18T19:56:24Z"
+    },
+    {
+      "name": "git-course",
+      "private": false,
+      "description": "Git tutorial command and test, personal use.",
+      "language": null,
+      "category": "default",
+      "cover": "assets/covers/default.png",
+      "url": "https://github.com/noncent/git-course",
+      "updatedAt": "2021-05-28T14:08:19Z"
+    },
+    {
+      "name": "instagram-follower-bot",
+      "private": false,
+      "description": "",
+      "language": "TypeScript",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/instagram-follower-bot",
+      "updatedAt": "2021-05-17T06:14:44Z"
+    },
+    {
+      "name": "phpjs",
+      "private": false,
+      "description": "php.js implements PHP functions in JavaScript",
+      "language": "JavaScript",
+      "category": "javascript",
+      "cover": "assets/covers/javascript.png",
+      "url": "https://github.com/noncent/phpjs",
+      "updatedAt": "2020-09-18T14:06:41Z"
+    },
+    {
+      "name": "laravel-surveyjs",
+      "private": false,
+      "description": "Laravel wrapper for SurveyJS library and Editor",
+      "language": "Vue",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/laravel-surveyjs",
+      "updatedAt": "2020-09-12T19:35:52Z"
+    },
+    {
+      "name": "kcfinder_ckeditor_absolute_url",
+      "private": false,
+      "description": "How To Setup KCFinder as Absolute URL Within CkEditor",
+      "language": null,
+      "category": "default",
+      "cover": "assets/covers/default.png",
+      "url": "https://github.com/noncent/kcfinder_ckeditor_absolute_url",
+      "updatedAt": "2020-08-16T14:45:05Z"
+    },
+    {
+      "name": "wamp-create-virtualhost",
+      "private": false,
+      "description": "Wamp Virtual Server Creator, Wamp Auto Virtual Server, Wamp Vhost Creator helps you to create a new virtual server on your machine on the fly. You can create HTTP/HTTPS virtual server by just clicking on few buttons..",
+      "language": "PHP",
+      "category": "devtools",
+      "cover": "assets/covers/devtools.png",
+      "url": "https://github.com/noncent/wamp-create-virtualhost",
+      "updatedAt": "2020-08-16T14:44:40Z"
+    },
+    {
+      "name": "windows-host-manager",
+      "private": false,
+      "description": "Windows Host Manager is a Batch tool to add entries in host file",
+      "language": "Batchfile",
+      "category": "devtools",
+      "cover": "assets/covers/devtools.png",
+      "url": "https://github.com/noncent/windows-host-manager",
+      "updatedAt": "2020-08-16T14:44:18Z"
+    },
+    {
+      "name": "simple-error-templates",
+      "private": false,
+      "description": "htaccess error templates, HTML error templates, Server error templates, PHP Error templates, Website error templates, This is the most beautiful and simplest error template ever :)",
+      "language": null,
+      "category": "security",
+      "cover": "assets/covers/security.png",
+      "url": "https://github.com/noncent/simple-error-templates",
+      "updatedAt": "2020-08-16T14:43:01Z"
+    },
+    {
+      "name": "google-api-php-client",
+      "private": false,
+      "description": "A PHP client library for accessing Google APIs",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/google-api-php-client",
+      "updatedAt": "2020-06-18T15:52:28Z"
+    },
+    {
+      "name": "mysql-tricks",
+      "private": false,
+      "description": "MySQL - Tricky Queries",
+      "language": null,
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/mysql-tricks",
+      "updatedAt": "2020-04-19T10:52:11Z"
+    },
+    {
+      "name": "chatbot",
+      "private": false,
+      "description": "A Simple ChatBot Widget",
+      "language": "JavaScript",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/chatbot",
+      "updatedAt": "2020-02-21T17:17:19Z"
+    },
+    {
+      "name": "lumendingojwtapi",
+      "private": false,
+      "description": "Lumen + Dingo API + JWT Auth + CORS Boilerplate",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/lumendingojwtapi",
+      "updatedAt": "2019-11-21T11:09:58Z"
+    },
+    {
+      "name": "lumen-jwt",
+      "private": false,
+      "description": "Lumen with JWT Authentication, Dingo API and CORS Support",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/lumen-jwt",
+      "updatedAt": "2019-11-21T11:09:56Z"
+    },
+    {
+      "name": "rest-api-with-lumen",
+      "private": false,
+      "description": "Rest API boilerplate for Lumen micro-framework.",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/rest-api-with-lumen",
+      "updatedAt": "2019-11-21T11:09:53Z"
+    },
+    {
+      "name": "lumen-api-demo",
+      "private": false,
+      "description": "Lumen rest api demo with Dingo/Api, JWT, CORS, PHPUNIT",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/lumen-api-demo",
+      "updatedAt": "2019-11-21T11:09:47Z"
+    },
+    {
+      "name": "web-speech-ai",
+      "private": false,
+      "description": "Simple AI Chat Bot Demo with Web Speech API",
+      "language": "JavaScript",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/web-speech-ai",
+      "updatedAt": "2019-11-20T10:41:10Z"
+    },
+    {
+      "name": "agent-human-handoff-nodejs",
+      "private": false,
+      "description": "A simple Dialogflow agent, a server, and a web interface that shows an approach for handling text-based conversations between a Dialogflow agent and a human operator",
+      "language": "JavaScript",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/agent-human-handoff-nodejs",
+      "updatedAt": "2019-01-28T16:41:49Z"
+    },
+    {
+      "name": "google-cloud-php-dialogflow",
+      "private": false,
+      "description": "",
+      "language": "PHP",
+      "category": "ai",
+      "cover": "assets/covers/ai-tools.png",
+      "url": "https://github.com/noncent/google-cloud-php-dialogflow",
+      "updatedAt": "2018-09-20T20:25:25Z"
+    },
+    {
+      "name": "codeigniter-log-viewer",
+      "private": false,
+      "description": "This is a simple Log Viewer for viewing Code Igniter logs on the browser",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/codeigniter-log-viewer",
+      "updatedAt": "2018-06-20T16:46:13Z"
+    },
+    {
+      "name": "laravel-admin",
+      "private": false,
+      "description": "Laravel Admin Panel",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/laravel-admin",
+      "updatedAt": "2018-01-24T15:07:12Z"
+    },
+    {
+      "name": "Image-Video-Slider-For-iOS-Android",
+      "private": false,
+      "description": "Hi Guys, I am sharing this code for you. I f you want image slider and video player as android native apps. Feel free to use.",
+      "language": null,
+      "category": "mobile",
+      "cover": "assets/covers/mobile.png",
+      "url": "https://github.com/noncent/Image-Video-Slider-For-iOS-Android",
+      "updatedAt": "2017-04-03T19:30:54Z"
+    },
+    {
+      "name": "mysql-workbench-export-laravel-5-migrations",
+      "private": false,
+      "description": "A MySQL Workbench plugin which exports a Model to Laravel 5 Migrations",
+      "language": "Python",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/mysql-workbench-export-laravel-5-migrations",
+      "updatedAt": "2017-03-31T12:56:01Z"
+    },
+    {
+      "name": "jConfig",
+      "private": false,
+      "description": "jConfig is working as function that helps to get config data from server side inside js file as json. jConfig return you all your server side config data as an json format.",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/jConfig",
+      "updatedAt": "2014-05-28T09:38:03Z"
+    },
+    {
+      "name": "PHP-JSON-With-Ajax",
+      "private": false,
+      "description": "",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/PHP-JSON-With-Ajax",
+      "updatedAt": "2014-05-23T14:28:21Z"
+    },
+    {
+      "name": "captcha.class.php",
+      "private": false,
+      "description": "A simple PHP4-like CAPTCHA Class",
+      "language": "PHP",
+      "category": "php",
+      "cover": "assets/covers/php.png",
+      "url": "https://github.com/noncent/captcha.class.php",
+      "updatedAt": "2014-03-06T14:53:49Z"
+    }
+  ]
+}

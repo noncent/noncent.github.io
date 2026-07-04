@@ -1,0 +1,85 @@
+#!/usr/bin/env node
+/**
+ * Sync GitHub repos into data/repos.json via gh CLI.
+ * Usage: node scripts/sync-repos.mjs
+ */
+import { execSync } from "node:child_process";
+import { writeFileSync, mkdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dir = dirname(fileURLToPath(import.meta.url));
+const root = join(__dir, "..");
+const outPath = join(root, "data", "repos.json");
+
+const COVERS = {
+  ai: "assets/covers/ai-tools.png",
+  devtools: "assets/covers/devtools.png",
+  php: "assets/covers/php.png",
+  javascript: "assets/covers/javascript.png",
+  security: "assets/covers/security.png",
+  mobile: "assets/covers/mobile.png",
+  rust: "assets/covers/rust.png",
+  social: "assets/covers/social.png",
+  default: "assets/covers/default.png",
+};
+
+function categorize(name, desc, lang) {
+  const n = name.toLowerCase();
+  const d = (desc || "").toLowerCase();
+  const l = (lang || "").toLowerCase();
+  const text = `${n} ${d}`;
+
+  if (/ai|bot|chat|speech|dialogflow|alexa|prompt|salesiq|aira|agent-human/.test(text)) return "ai";
+  if (/instagram|twitter|tweet|social|scraper|follower/.test(text)) return "social";
+  if (/crypto|encrypt|security|htaccess|xss|escape/.test(text)) return "security";
+  if (l === "swift" || /ios|android|macos|bruos/.test(text)) return "mobile";
+  if (l === "rust" || n === "discope") return "rust";
+  if (/pagespeed|lighthouse|discope|devtools|cheat|host-manager|host-entry|wamp|windows-host|bulk-page/.test(text)) return "devtools";
+  if (l === "php" || /laravel|lumen|codeigniter|mysql|pdo/.test(text)) return "php";
+  if (/javascript|typescript|node|angular|vue|jquery|js/.test(l) || /\.js$|node|angular|ssr|bot-browser/.test(text)) return "javascript";
+  return "default";
+}
+
+function runGh() {
+  const raw = execSync(
+    'gh repo list noncent --limit 200 --json name,visibility,description,primaryLanguage,updatedAt,url,isPrivate',
+    { encoding: "utf8" }
+  );
+  return JSON.parse(raw);
+}
+
+const rows = runGh();
+const repos = rows.map((r) => {
+  const lang = r.primaryLanguage?.name || null;
+  const category = categorize(r.name, r.description, lang);
+  return {
+    name: r.name,
+    private: r.isPrivate,
+    description: r.description || "",
+    language: lang,
+    category,
+    cover: COVERS[category] || COVERS.default,
+    url: r.url,
+    updatedAt: r.updatedAt,
+  };
+});
+
+repos.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+
+const stats = {
+  public: repos.filter((r) => !r.private).length,
+  private: repos.filter((r) => r.private).length,
+  total: repos.length,
+};
+
+const payload = {
+  generatedAt: new Date().toISOString(),
+  owner: "noncent",
+  stats,
+  repos,
+};
+
+mkdirSync(dirname(outPath), { recursive: true });
+writeFileSync(outPath, JSON.stringify(payload, null, 2) + "\n");
+console.log(`Wrote ${repos.length} repos (${stats.public} public, ${stats.private} private) → ${outPath}`);

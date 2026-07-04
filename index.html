@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
   <script>
     (function () {
       try {
@@ -99,35 +99,39 @@
   </section>
 
   <!-- STATS -->
-  <section id="stats" class="section stats-band">
-    <div class="stats-inner reveal-stagger">
-      <div class="stat-block" style="--i:0">
-        <span class="stat-num" data-target="0" id="stat-repos">0</span>
+  <section id="stats" class="section section-pad stats-section">
+    <div class="stats-grid reveal-stagger">
+      <article class="stat-card" style="--i:0">
+        <div class="stat-icon-wrap" data-stat="repos"></div>
+        <span class="stat-num" id="stat-repos">—</span>
         <span class="stat-label">Public repos</span>
-      </div>
-      <div class="stat-block" style="--i:1">
-        <span class="stat-num" data-target="0" id="stat-langs">0</span>
+      </article>
+      <article class="stat-card" style="--i:1">
+        <div class="stat-icon-wrap" data-stat="langs"></div>
+        <span class="stat-num" id="stat-langs">—</span>
         <span class="stat-label">Languages</span>
-      </div>
-      <div class="stat-block" style="--i:2">
-        <span class="stat-num" data-target="0" id="stat-cats">0</span>
+      </article>
+      <article class="stat-card" style="--i:2">
+        <div class="stat-icon-wrap" data-stat="cats"></div>
+        <span class="stat-num" id="stat-cats">—</span>
         <span class="stat-label">Categories</span>
-      </div>
-      <div class="stat-block" style="--i:3">
-        <span class="stat-num" data-target="15">15+</span>
+      </article>
+      <article class="stat-card stat-card--accent" style="--i:3">
+        <div class="stat-icon-wrap" data-stat="years"></div>
+        <span class="stat-num">15+</span>
         <span class="stat-label">Years shipping</span>
-      </div>
+      </article>
     </div>
   </section>
 
-  <!-- FEATURED BENTO -->
+  <!-- FEATURED -->
   <section id="featured" class="section section-pad">
     <div class="section-head reveal">
       <span class="section-label">Spotlight</span>
       <h2 class="section-title">Featured work</h2>
-      <p class="section-desc">Hand-picked projects worth your time.</p>
+      <p class="section-desc">Flagship projects — built, shipped, and open-sourced.</p>
     </div>
-    <div id="bento" class="bento reveal-stagger"></div>
+    <div id="featured-showcase" class="featured-showcase reveal-stagger"></div>
   </section>
 
   <!-- ALL REPOS -->
@@ -166,7 +170,7 @@
     <p>&copy; noncent · synced from GitHub · <a href="https://github.com/noncent/noncent.github.io" target="_blank" rel="noopener">source</a></p>
   </footer>
 
-  <script src="icons.js?v=4"></script>
-  <script src="app.js?v=4"></script>
+  <script src="icons.js?v=5"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

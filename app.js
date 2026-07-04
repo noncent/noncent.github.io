@@ -3,11 +3,32 @@
 
   const FEATURED = ["promptvault", "discope", "bruos", "developers-cheat-sheet"];
 
+  const FEATURED_META = {
+    promptvault: {
+      tagline: "Searchable AI prompt library with fuzzy search, themes, and one-click copy.",
+      accent: "#8b5cf6",
+    },
+    discope: {
+      tagline: "Rust-powered disk usage analyzer — fast, visual, and cross-platform.",
+      accent: "#f97316",
+    },
+    bruos: {
+      tagline: "Native macOS bulk file renamer with an intuitive 3-pane SwiftUI interface.",
+      accent: "#0ea5e9",
+    },
+    "developers-cheat-sheet": {
+      tagline: "Daily commands and snippets for developers and system administrators.",
+      accent: "#10b981",
+    },
+  };
+
+  const STAT_ICONS = { repos: "folder", langs: "globe", cats: "layers", years: "zap" };
+
   const els = {
     search: document.getElementById("search"),
     chips: document.getElementById("chips"),
     grid: document.getElementById("grid"),
-    bento: document.getElementById("bento"),
+    featured: document.getElementById("featured-showcase"),
     empty: document.getElementById("empty"),
     repoCount: document.getElementById("repo-count"),
     pillarRepoCount: document.getElementById("pillar-repo-count"),
@@ -16,6 +37,7 @@
     statRepos: document.getElementById("stat-repos"),
     statLangs: document.getElementById("stat-langs"),
     statCats: document.getElementById("stat-cats"),
+    statsSection: document.getElementById("stats"),
     heroParallax: document.getElementById("hero-parallax"),
     parallaxOrbs: document.getElementById("parallax-orbs"),
   };
@@ -60,15 +82,18 @@
     return '<svg class="repo-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>';
   }
 
-  function montageHtml(repo, variant) {
+  function arrowSvg() {
+    return icons ? icons.icon("arrowRight", "feat-arrow") : "→";
+  }
+
+  function montageHtml(repo) {
     const fb = escapeHtml(repo.fallback || repo.cover);
     const main = escapeHtml(repo.cover);
     const m = repo.montage || [];
     const a = escapeHtml(m[0] || repo.cover);
     const b = escapeHtml(m[1] || repo.cover);
-    const cls = variant === "bento" ? "card-montage card-montage--bento" : "card-montage";
     return `
-      <div class="${cls}" aria-hidden="true">
+      <div class="card-montage" aria-hidden="true">
         <img class="montage-main" src="${main}" alt="" loading="lazy" data-fallback="${fb}" />
         <img class="montage-tile montage-tile--a" src="${a}" alt="" loading="lazy" data-fallback="${fb}" />
         <img class="montage-tile montage-tile--b" src="${b}" alt="" loading="lazy" data-fallback="${fb}" />
@@ -78,6 +103,65 @@
   function categoryCount(cat) {
     if (cat === "All") return DATA.repos.length;
     return DATA.repos.filter((r) => r.category === cat).length;
+  }
+
+  /* ---- stats ---- */
+  function initStatIcons() {
+    document.querySelectorAll(".stat-icon-wrap[data-stat]").forEach((wrap) => {
+      const key = wrap.dataset.stat;
+      const name = STAT_ICONS[key];
+      if (icons && name) wrap.innerHTML = icons.icon(name, "stat-icon");
+    });
+  }
+
+  function setStatValue(el, val, animate) {
+    if (!el) return;
+    if (!animate || reducedMotion || val === 0) {
+      el.textContent = val;
+      return;
+    }
+    const dur = 1200;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(val * ease);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function applyStats(animate) {
+    if (!DATA) return;
+    setStatValue(els.statRepos, DATA.stats.total, animate);
+    setStatValue(els.statLangs, DATA.stats.languages, animate);
+    setStatValue(els.statCats, DATA.stats.categories, animate);
+  }
+
+  function initStatsObserver() {
+    if (!DATA || !els.statsSection) return;
+    if (reducedMotion) return;
+
+    const r = els.statsSection.getBoundingClientRect();
+    const belowFold = r.top >= window.innerHeight * 0.85;
+    if (!belowFold) return;
+
+    /* Below fold: replay count-up when scrolled into view */
+    [els.statRepos, els.statLangs, els.statCats].forEach((el) => { if (el) el.textContent = "0"; });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !countersDone) {
+            countersDone = true;
+            applyStats(true);
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(els.statsSection);
   }
 
   /* ---- render ---- */
@@ -128,32 +212,71 @@
     els.repoCount.textContent = text;
   }
 
-  function bentoCard(repo, cls) {
+  function featuredHeroCard(repo) {
+    const meta = FEATURED_META[repo.name] || {};
+    const desc = meta.tagline || repo.description || "Open-source project";
+    const accent = meta.accent || "#8b5cf6";
+    const fb = escapeHtml(repo.fallback || repo.cover);
+    const cover = escapeHtml(repo.cover);
+    const catIcon = icons ? icons.categoryIcon(repo.category) : "";
     return `
-      <a class="bento-card ${cls || ""}" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--i:0">
-        ${montageHtml(repo, "bento")}
-        <div class="bento-overlay"></div>
-        <div class="bento-body">
-          <div class="bento-tag">${escapeHtml(repo.category)}</div>
-          <h3 class="bento-title">${escapeHtml(repo.name)}</h3>
-          <p class="bento-desc">${escapeHtml(repo.description || "Open-source project")}</p>
+      <a class="feat-hero" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--feat-accent:${escapeHtml(accent)}">
+        <div class="feat-hero-media">
+          <img src="${cover}" alt="" loading="lazy" data-fallback="${fb}" />
+          <span class="feat-hero-badge">Flagship</span>
+        </div>
+        <div class="feat-hero-body">
+          <div class="feat-meta-row">
+            <span class="feat-cat">${catIcon}<span>${escapeHtml(repo.category)}</span></span>
+            ${repo.language ? `<span class="feat-lang">${escapeHtml(repo.language)}</span>` : ""}
+          </div>
+          <h3 class="feat-hero-title">${escapeHtml(repo.name)}</h3>
+          <p class="feat-hero-desc">${escapeHtml(desc)}</p>
+          <span class="feat-cta">View on GitHub ${arrowSvg()}</span>
         </div>
       </a>`;
   }
 
-  function renderBento() {
+  function featuredCard(repo, index) {
+    const meta = FEATURED_META[repo.name] || {};
+    const desc = meta.tagline || repo.description || "Open-source project";
+    const accent = meta.accent || "#8b5cf6";
+    const fb = escapeHtml(repo.fallback || repo.cover);
+    const cover = escapeHtml(repo.cover);
+    const catIcon = icons ? icons.categoryIcon(repo.category) : "";
+    const shortDesc = desc.length > 90 ? desc.slice(0, 87) + "…" : desc;
+    return `
+      <a class="feat-card" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--feat-accent:${escapeHtml(accent)};--i:${index}">
+        <div class="feat-card-accent" aria-hidden="true"></div>
+        <div class="feat-card-thumb">
+          <img src="${cover}" alt="" loading="lazy" data-fallback="${fb}" />
+        </div>
+        <div class="feat-card-body">
+          <div class="feat-meta-row">
+            <span class="feat-cat">${catIcon}<span>${escapeHtml(repo.category)}</span></span>
+            ${repo.language ? `<span class="feat-lang">${escapeHtml(repo.language)}</span>` : ""}
+          </div>
+          <h3 class="feat-card-title">${escapeHtml(repo.name)}</h3>
+          <p class="feat-card-desc">${escapeHtml(shortDesc)}</p>
+          <span class="feat-cta feat-cta--sm">Open repo ${arrowSvg()}</span>
+        </div>
+      </a>`;
+  }
+
+  function renderFeatured() {
+    if (!els.featured) return;
     const pv = DATA.repos.find((r) => r.name === "promptvault");
     const picks = ["discope", "bruos", "developers-cheat-sheet"]
       .map((n) => DATA.repos.find((r) => r.name === n))
       .filter(Boolean);
+
     let html = "";
-    if (pv) html += bentoCard(pv, "bento-card--hero");
-    picks.forEach((r, i) => {
-      html += bentoCard(r, i === 0 ? "bento-card--wide" : "");
-    });
-    els.bento.innerHTML = html;
-    initImageFallbacks(els.bento);
-    initCardTilt(els.bento.querySelectorAll(".bento-card"));
+    if (pv) html += featuredHeroCard(pv);
+    if (picks.length) {
+      html += `<div class="feat-row">${picks.map((r, i) => featuredCard(r, i)).join("")}</div>`;
+    }
+    els.featured.innerHTML = html;
+    initImageFallbacks(els.featured);
   }
 
   function repoCard(repo, index) {
@@ -164,7 +287,7 @@
         : "";
     return `
       <a class="repo-card" role="listitem" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--i:${index}">
-        ${montageHtml(repo, "repo")}
+        ${montageHtml(repo)}
         <div class="repo-body">
           <div class="repo-head">
             <h3 class="repo-name">${escapeHtml(repo.name)}</h3>
@@ -221,40 +344,13 @@
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
-            if (e.target.id === "stats") animateCounters();
-          }
+          if (e.isIntersecting) e.target.classList.add("is-visible");
         });
       },
       { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
     targets.forEach((el) => {
       if (!el.classList.contains("hero-content")) io.observe(el);
-    });
-  }
-
-  /* ---- counters ---- */
-  function animateCounters() {
-    if (countersDone || !DATA) return;
-    countersDone = true;
-    const targets = [
-      { el: els.statRepos, val: DATA.stats.total },
-      { el: els.statLangs, val: DATA.stats.languages },
-      { el: els.statCats, val: DATA.stats.categories },
-    ];
-    targets.forEach(({ el, val }) => {
-      if (!el) return;
-      if (reducedMotion) { el.textContent = val; return; }
-      const dur = 1400;
-      const start = performance.now();
-      function tick(now) {
-        const p = Math.min((now - start) / dur, 1);
-        const ease = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(val * ease);
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
     });
   }
 
@@ -303,7 +399,7 @@
         const r = card.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width - 0.5;
         const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-6px)`;
+        card.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`;
       });
       card.addEventListener("mouseleave", () => {
         card.style.transform = "";
@@ -345,13 +441,16 @@
   });
 
   /* ---- boot ---- */
+  initStatIcons();
   fetch("data/repos.json")
     .then((r) => r.json())
     .then((json) => {
       DATA = json;
       if (els.pillarRepoCount) els.pillarRepoCount.textContent = DATA.stats.total;
+      applyStats(false);
+      initStatsObserver();
       renderChips();
-      renderBento();
+      renderFeatured();
       render();
       initScrollReveal();
       initNavSpy();

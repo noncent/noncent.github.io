@@ -49,13 +49,12 @@ function runGh() {
   return JSON.parse(raw);
 }
 
-const rows = runGh();
+const rows = runGh().filter((r) => !r.isPrivate);
 const repos = rows.map((r) => {
   const lang = r.primaryLanguage?.name || null;
   const category = categorize(r.name, r.description, lang);
   return {
     name: r.name,
-    private: r.isPrivate,
     description: r.description || "",
     language: lang,
     category,
@@ -68,9 +67,10 @@ const repos = rows.map((r) => {
 repos.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
 const stats = {
-  public: repos.filter((r) => !r.private).length,
-  private: repos.filter((r) => r.private).length,
+  public: repos.length,
   total: repos.length,
+  languages: new Set(repos.map((r) => r.language).filter(Boolean)).size,
+  categories: new Set(repos.map((r) => r.category)).size,
 };
 
 const payload = {
@@ -82,4 +82,4 @@ const payload = {
 
 mkdirSync(dirname(outPath), { recursive: true });
 writeFileSync(outPath, JSON.stringify(payload, null, 2) + "\n");
-console.log(`Wrote ${repos.length} repos (${stats.public} public, ${stats.private} private) → ${outPath}`);
+console.log(`Wrote ${repos.length} public repos → ${outPath}`);

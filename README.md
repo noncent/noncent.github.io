@@ -1,14 +1,15 @@
-# noncent.github.io — Repository Dashboard
+# noncent.github.io — Portfolio SPA
 
-Welcome dashboard at **https://noncent.github.io/** listing all GitHub repositories (public + private).
+Scroll-driven portfolio dashboard at **https://noncent.github.io/** showcasing 46 public open-source repositories.
 
 ## Features
 
-- 51 repositories (46 public with links, 5 private with lock badges)
-- AI-generated category cover images
-- Search, visibility/language/category filters
-- Light/dark theme (default: light)
-- Featured PromptVault card
+- Full-viewport hero with parallax and CTAs
+- Scroll-triggered section animations (Intersection Observer)
+- Animated stat counters
+- Bento featured grid + searchable repo library
+- Light/dark theme, 3D card tilt on hover
+- Category filters and fuzzy search
 
 ## Refresh repo data
 
@@ -16,7 +17,7 @@ Welcome dashboard at **https://noncent.github.io/** listing all GitHub repositor
 node scripts/sync-repos.mjs
 ```
 
-Requires authenticated `gh` CLI (`gh auth status`).
+Requires authenticated `gh` CLI. Only **public** repos are synced.
 
 ## Local preview
 
@@ -24,7 +25,3 @@ Requires authenticated `gh` CLI (`gh auth status`).
 python3 -m http.server 8788
 # open http://localhost:8788
 ```
-
-## Security note
-
-Private repository names and descriptions are included in the static `data/repos.json` deployed publicly. They are not linkable without GitHub access.

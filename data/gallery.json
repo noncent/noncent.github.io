@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "title": "Web Performance Audit Pipeline",
+      "category": "Platform Architecture",
+      "image": "lighthouse/lighthouse.svg",
+      "caption": "Automated Lighthouse auditing workflow for continuous performance governance."
+    },
+    {
+      "title": "Enterprise Integration Landscape",
+      "category": "Enterprise Ecosystem",
+      "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&h=600&fit=crop&q=80",
+      "caption": "API-first integration hub connecting CRM, CMS, booking and analytics systems."
+    },
+    {
+      "title": "Cloud-Native Reference Architecture",
+      "category": "Cloud Architecture",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&h=600&fit=crop&q=80",
+      "caption": "Multi-AZ deployment with CDN edge, container orchestration and managed data stores."
+    },
+    {
+      "title": "Microservices Domain Map",
+      "category": "Platform Architecture",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=600&fit=crop&q=80",
+      "caption": "Domain-driven service boundaries with event bus and API gateway layer."
+    },
+    {
+      "title": "Headless Content Delivery",
+      "category": "Integration Landscape",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&h=600&fit=crop&q=80",
+      "caption": "Content API feeding web, mobile app, partner channels and personalisation engine."
+    },
+    {
+      "title": "AI Conversational Flow",
+      "category": "AI Architecture",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&h=600&fit=crop&q=80",
+      "caption": "Multi-channel NLU pipeline with human handoff and context preservation."
+    }
+  ]
+}

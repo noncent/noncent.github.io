@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "quote": "Neeraj brings rare depth — he thinks in systems, communicates in business outcomes, and delivers engineering excellence without compromise. Our platform transformation simply wouldn't have succeeded without his architectural leadership.",
+      "name": "Director of Engineering",
+      "role": "VP Engineering",
+      "company": "Global Hospitality Group"
+    },
+    {
+      "quote": "One of the most trusted architects I've worked with. He balances pragmatism with vision, and his ability to align C-suite stakeholders with engineering reality is exceptional.",
+      "name": "Chief Technology Officer",
+      "role": "CTO",
+      "company": "Digital Transformation Programme"
+    },
+    {
+      "quote": "His open-source contributions and production systems reflect the same standard — clean architecture, thoughtful documentation, and genuine care for developer experience.",
+      "name": "Principal Engineer",
+      "role": "Staff Engineer",
+      "company": "Platform Engineering Team"
+    }
+  ]
+}

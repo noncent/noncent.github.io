@@ -1,0 +1,82 @@
+{
+  "items": [
+    {
+      "id": "enterprise-platform",
+      "name": "Enterprise Digital Platform",
+      "description": "Multi-brand hospitality platform spanning booking engines, loyalty, content and integrations — designed for global scale and operational resilience.",
+      "outcomes": [
+        "Unified architecture across 10+ properties and digital touchpoints",
+        "40% reduction in time-to-market for new brand launches",
+        "Headless CMS enabling marketing autonomy without engineering bottlenecks"
+      ],
+      "tech": ["AWS", "Microservices", "Headless CMS", "Drupal", "Redis", "CDN"],
+      "thumbnail": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=500&fit=crop&q=80",
+      "caseStudyUrl": "#featured"
+    },
+    {
+      "id": "promptvault",
+      "name": "PromptVault",
+      "description": "Production-grade AI prompt library with fuzzy search, category filters, and one-click copy — built for engineering teams adopting LLM workflows.",
+      "outcomes": [
+        "Centralised prompt governance for development teams",
+        "Sub-100ms client-side search across 40+ curated prompts",
+        "Deployed on GitHub Pages with zero backend dependency"
+      ],
+      "tech": ["JavaScript", "LLM", "SPA", "GitHub Pages"],
+      "thumbnail": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop&q=80",
+      "caseStudyUrl": "https://noncent.github.io/promptvault/"
+    },
+    {
+      "id": "cloud-microservices",
+      "name": "Cloud-Native Microservices",
+      "description": "Event-driven microservices platform with API gateway, service mesh patterns, and observability baked in from day one.",
+      "outcomes": [
+        "Independent deployability for 15+ domain services",
+        "99.9% uptime SLA through circuit breakers and graceful degradation",
+        "Standardised CI/CD pipelines across all service teams"
+      ],
+      "tech": ["Kubernetes", "Docker", "REST", "GraphQL", "Azure", "Terraform"],
+      "thumbnail": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&fit=crop&q=80",
+      "caseStudyUrl": "#featured"
+    },
+    {
+      "id": "headless-cms",
+      "name": "Headless Content Platform",
+      "description": "Composable content architecture decoupling editorial workflows from presentation layers — powering web, mobile and third-party channels.",
+      "outcomes": [
+        "Single content source feeding web, app and partner APIs",
+        "Editorial publish cycles reduced from days to hours",
+        "Multi-language content delivery across 6 locales"
+      ],
+      "tech": ["Drupal", "Next.js", "GraphQL", "Vercel", "CloudFront"],
+      "caseStudyUrl": "#featured",
+      "thumbnail": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80"
+    },
+    {
+      "id": "discope",
+      "name": "Discope",
+      "description": "High-performance disk usage analyser built in Rust — visualising storage hierarchies with native speed and cross-platform support.",
+      "outcomes": [
+        "10× faster directory scans vs Node.js equivalents",
+        "Native macOS experience with SwiftUI-grade performance in Rust",
+        "Open-sourced for developer community adoption"
+      ],
+      "tech": ["Rust", "Tauri", "Systems Programming"],
+      "thumbnail": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80",
+      "caseStudyUrl": "https://github.com/noncent/discope"
+    },
+    {
+      "id": "ai-conversational",
+      "name": "AI Conversational Platform",
+      "description": "Multi-channel conversational AI integrating Dialogflow, speech interfaces, and human handoff — deployed across voice and web channels.",
+      "outcomes": [
+        "60% reduction in support ticket volume via intelligent routing",
+        "Seamless agent handoff preserving full conversation context",
+        "Voice + web channel parity with unified NLU pipeline"
+      ],
+      "tech": ["Dialogflow", "Node.js", "PHP", "Alexa", "Web Speech API"],
+      "thumbnail": "https://images.unsplash.com/photo-1535378917042-10a22c959f86?w=800&h=500&fit=crop&q=80",
+      "caseStudyUrl": "https://github.com/noncent/chatbot"
+    }
+  ]
+}

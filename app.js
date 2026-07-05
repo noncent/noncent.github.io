@@ -1,340 +1,387 @@
 (function () {
   "use strict";
 
-  const FEATURED = ["promptvault", "discope", "bruos", "developers-cheat-sheet"];
+  const $ = (id) => document.getElementById(id);
+  const icons = window.NONCENT_ICONS;
 
-  const FEATURED_META = {
-    promptvault: {
-      tagline: "Searchable AI prompt library with fuzzy search, themes, and one-click copy.",
-      accent: "#8b5cf6",
-    },
-    discope: {
-      tagline: "Rust-powered disk usage analyzer — fast, visual, and cross-platform.",
-      accent: "#f97316",
-    },
-    bruos: {
-      tagline: "Native macOS bulk file renamer with an intuitive 3-pane SwiftUI interface.",
-      accent: "#0ea5e9",
-    },
-    "developers-cheat-sheet": {
-      tagline: "Daily commands and snippets for developers and system administrators.",
-      accent: "#10b981",
-    },
-  };
-
-  const STAT_ICONS = { repos: "folder", langs: "globe", cats: "layers", years: "zap" };
-
-  const els = {
-    search: document.getElementById("search"),
-    chips: document.getElementById("chips"),
-    grid: document.getElementById("grid"),
-    featured: document.getElementById("featured-showcase"),
-    empty: document.getElementById("empty"),
-    repoCount: document.getElementById("repo-count"),
-    pillarRepoCount: document.getElementById("pillar-repo-count"),
-    themeToggle: document.getElementById("theme-toggle"),
-    siteNav: document.getElementById("site-nav"),
-    statRepos: document.getElementById("stat-repos"),
-    statLangs: document.getElementById("stat-langs"),
-    statCats: document.getElementById("stat-cats"),
-    statsSection: document.getElementById("stats"),
-    heroParallax: document.getElementById("hero-parallax"),
-    parallaxOrbs: document.getElementById("parallax-orbs"),
-  };
-
-  let DATA = null;
+  let profile, projects, expertise, timeline, testimonials, thoughts, gallery, github, repos;
   let activeFilter = "All";
   let countersDone = false;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const icons = window.NONCENT_ICONS;
 
-  function escapeHtml(s) {
-    return String(s)
+  function esc(s) {
+    return String(s ?? "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
   }
 
-  function fuzzy(query, text) {
-    if (!query) return { score: 1 };
-    const q = query.toLowerCase();
+  function fuzzy(q, text) {
+    if (!q) return { score: 1 };
+    const query = q.toLowerCase();
     const t = (text || "").toLowerCase();
     if (!t) return null;
     let qi = 0;
-    for (let i = 0; i < t.length && qi < q.length; i++) {
-      if (t[i] === q[qi]) qi++;
+    for (let i = 0; i < t.length && qi < query.length; i++) {
+      if (t[i] === query[qi]) qi++;
     }
-    if (qi < q.length) return null;
-    return { score: q.length / t.length };
+    return qi < query.length ? null : { score: query.length / t.length };
   }
 
-  function formatDate(iso) {
+  function fmtDate(iso) {
     if (!iso) return "";
-    return new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+    return new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "short" });
   }
 
-  function isFeatured(repo) {
-    return FEATURED.includes(repo.name);
+  function fmtNum(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + "M";
+    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+    return String(n);
   }
 
-  function extSvg() {
-    return '<svg class="repo-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>';
-  }
-
-  function arrowSvg() {
-    return icons ? icons.icon("arrowRight", "feat-arrow") : "→";
-  }
-
-  function montageHtml(repo) {
-    const fb = escapeHtml(repo.fallback || repo.cover);
-    const main = escapeHtml(repo.cover);
-    const m = repo.montage || [];
-    const a = escapeHtml(m[0] || repo.cover);
-    const b = escapeHtml(m[1] || repo.cover);
-    return `
-      <div class="card-montage" aria-hidden="true">
-        <img class="montage-main" src="${main}" alt="" loading="lazy" data-fallback="${fb}" />
-        <img class="montage-tile montage-tile--a" src="${a}" alt="" loading="lazy" data-fallback="${fb}" />
-        <img class="montage-tile montage-tile--b" src="${b}" alt="" loading="lazy" data-fallback="${fb}" />
-      </div>`;
-  }
-
-  function categoryCount(cat) {
-    if (cat === "All") return DATA.repos.length;
-    return DATA.repos.filter((r) => r.category === cat).length;
-  }
-
-  /* ---- stats ---- */
-  function initStatIcons() {
-    document.querySelectorAll(".stat-icon-wrap[data-stat]").forEach((wrap) => {
-      const key = wrap.dataset.stat;
-      const name = STAT_ICONS[key];
-      if (icons && name) wrap.innerHTML = icons.icon(name, "stat-icon");
-    });
-  }
-
-  function setStatValue(el, val, animate) {
-    if (!el) return;
-    if (!animate || reducedMotion || val === 0) {
-      el.textContent = val;
-      return;
+  /* ---- Render: Hero & About ---- */
+  function renderHero() {
+    const hl = $("hero-headline");
+    if (hl && profile.headline) {
+      hl.innerHTML = profile.headline.map((l) => esc(l)).join("<br />");
     }
-    const dur = 1200;
-    const start = performance.now();
-    function tick(now) {
-      const p = Math.min((now - start) / dur, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(val * ease);
-      if (p < 1) requestAnimationFrame(tick);
+    const sub = $("hero-sub");
+    if (sub) sub.textContent = profile.subheadline || "";
+
+    const photo = $("hero-photo");
+    if (photo) {
+      photo.addEventListener("error", () => {
+        photo.style.display = "none";
+        photo.parentElement.style.background = "linear-gradient(135deg,#1a1a1a,#2a2a2a)";
+      }, { once: true });
     }
-    requestAnimationFrame(tick);
   }
 
-  function applyStats(animate) {
-    if (!DATA) return;
-    setStatValue(els.statRepos, DATA.stats.total, animate);
-    setStatValue(els.statLangs, DATA.stats.languages, animate);
-    setStatValue(els.statCats, DATA.stats.categories, animate);
+  function renderAbout() {
+    const intro = $("about-intro");
+    if (intro) intro.textContent = profile.about?.intro || "";
+
+    const pillars = $("about-pillars");
+    if (pillars && profile.about?.pillars) {
+      pillars.innerHTML = profile.about.pillars.map((p) => `<li>${esc(p)}</li>`).join("");
+    }
+
+    const statsEl = $("about-stats");
+    if (statsEl && profile.stats) {
+      statsEl.innerHTML = profile.stats
+        .map(
+          (s, i) => `
+        <article class="stat-card" style="--i:${i}">
+          <span class="stat-value">${esc(s.value)}</span>
+          <span class="stat-label">${esc(s.label)}</span>
+        </article>`
+        )
+        .join("");
+    }
   }
 
-  function initStatsObserver() {
-    if (!DATA || !els.statsSection) return;
-    if (reducedMotion) return;
-
-    const r = els.statsSection.getBoundingClientRect();
-    const belowFold = r.top >= window.innerHeight * 0.85;
-    if (!belowFold) return;
-
-    /* Below fold: replay count-up when scrolled into view */
-    [els.statRepos, els.statLangs, els.statCats].forEach((el) => { if (el) el.textContent = "0"; });
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting && !countersDone) {
-            countersDone = true;
-            applyStats(true);
-            io.disconnect();
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    io.observe(els.statsSection);
-  }
-
-  /* ---- render ---- */
-  function renderChips() {
-    const cats = [...new Set(DATA.repos.map((r) => r.category))].sort();
-    const items = [{ key: "All", label: "All" }, ...cats.map((c) => ({ key: c, label: c }))];
-    els.chips.innerHTML = items
-      .map(({ key, label }) => {
-        const count = categoryCount(key);
-        const chipIcon = icons ? icons.categoryIcon(key === "All" ? "default" : key) : "";
-        return `<button class="chip${activeFilter === key ? " active" : ""}" type="button" data-filter="${escapeHtml(key)}">${chipIcon}<span>${escapeHtml(label)} (${count})</span></button>`;
-      })
+  /* ---- Render: Featured ---- */
+  function renderFeatured() {
+    const grid = $("featured-grid");
+    if (!grid || !projects?.items) return;
+    grid.innerHTML = projects.items
+      .map(
+        (p, i) => `
+      <article class="project-card" style="--i:${i}">
+        <div class="project-thumb">
+          <img src="${esc(p.thumbnail)}" alt="" loading="lazy" />
+        </div>
+        <div class="project-body">
+          <h3 class="project-name">${esc(p.name)}</h3>
+          <p class="project-desc">${esc(p.description)}</p>
+          <ul class="project-outcomes">${(p.outcomes || []).map((o) => `<li>${esc(o)}</li>`).join("")}</ul>
+          <div class="tech-pills">${(p.tech || []).map((t) => `<span class="tech-pill">${esc(t)}</span>`).join("")}</div>
+          <a class="btn btn-outline btn-sm" href="${esc(p.caseStudyUrl)}" target="_blank" rel="noopener">View Case Study</a>
+        </div>
+      </article>`
+      )
       .join("");
   }
 
-  function matchesFilter(repo) {
-    if (activeFilter === "All") return true;
-    return repo.category === activeFilter;
+  /* ---- Render: Engineering Impact ---- */
+  const IMPACT_ICONS = {
+    repos: "folder",
+    stars: "star",
+    forks: "code",
+    contributions: "zap",
+    years: "globe",
+    languages: "layers",
+  };
+
+  function renderEngineering() {
+    const hl = $("impact-headline");
+    const sub = $("impact-sub");
+    if (hl) hl.textContent = profile.engineeringImpact?.headline || "Engineering Through Code.";
+    if (sub) sub.textContent = profile.engineeringImpact?.subheadline || "";
+
+    const g = github?.stats || {};
+    const cards = [
+      { key: "repos", value: g.publicRepos || repos?.stats?.public || 0, label: "Total Repositories" },
+      { key: "stars", value: g.totalStars || 0, label: "Total Stars" },
+      { key: "forks", value: g.totalForks || 0, label: "Total Forks" },
+      { key: "contributions", value: g.contributions || 0, label: "Contributions" },
+      { key: "years", value: (g.yearsActive || 0) + "+", label: "Years Active" },
+      { key: "languages", value: g.languages || repos?.stats?.languages || 0, label: "Languages Used" },
+    ];
+
+    const grid = $("impact-grid");
+    if (grid) {
+      grid.innerHTML = cards
+        .map(
+          (c, i) => `
+        <article class="impact-card" style="--i:${i}">
+          ${icons ? icons.icon(IMPACT_ICONS[c.key] || "folder", "impact-icon") : ""}
+          <span class="impact-value" data-target="${typeof c.value === "number" ? c.value : 0}">${esc(String(c.value))}</span>
+          <span class="impact-label">${esc(c.label)}</span>
+        </article>`
+        )
+        .join("");
+    }
+
+    const lb = $("lang-breakdown");
+    const breakdown = github?.languageBreakdown || [];
+    if (lb && breakdown.length) {
+      lb.innerHTML = `
+        <h3>Most Used Languages</h3>
+        <div class="lang-bars">
+          ${breakdown
+            .slice(0, 6)
+            .map(
+              (l) => `
+            <div class="lang-bar-row">
+              <span class="lang-bar-name">${esc(l.name)}</span>
+              <div class="lang-bar-track"><div class="lang-bar-fill" style="width:${l.pct}%"></div></div>
+              <span class="lang-bar-pct">${l.pct}%</span>
+            </div>`
+            )
+            .join("")}
+        </div>`;
+    }
   }
 
-  function scoreRepo(repo, query) {
-    if (!matchesFilter(repo)) return null;
-    if (!query) return { repo, score: 1 };
-    const name = fuzzy(query, repo.name);
-    const desc = fuzzy(query, repo.description);
-    const lang = fuzzy(query, repo.language || "");
+  /* ---- Render: Repos ---- */
+  function renderRepoFilters() {
+    const el = $("repo-filters");
+    if (!el) return;
+    const cats = repos?.filterCategories || ["All"];
+    const items = ["All", ...cats.filter((c) => c !== "All")];
+    el.innerHTML = items
+      .map(
+        (c) =>
+          `<button class="filter-chip${activeFilter === c ? " active" : ""}" type="button" data-filter="${esc(c)}" role="tab">${esc(c)}</button>`
+      )
+      .join("");
+  }
+
+  function scoreRepo(r, query) {
+    if (activeFilter !== "All" && r.category !== activeFilter) return null;
+    if (!query) return { repo: r, score: 1 };
+    const name = fuzzy(query, r.name);
+    const desc = fuzzy(query, r.description);
+    const lang = fuzzy(query, r.language || "");
     if (!name && !desc && !lang) return null;
     return {
-      repo,
+      repo: r,
       score: (name ? name.score * 6 : 0) + (desc ? desc.score * 2 : 0) + (lang ? lang.score * 3 : 0),
     };
   }
 
-  function updateRepoCount(shown, total, filter, query) {
-    if (!els.repoCount) return;
-    let text;
-    if (query && filter !== "All") {
-      text = `Showing ${shown} of ${total} · ${filter} · matching "${query}"`;
-    } else if (query) {
-      text = `Showing ${shown} of ${total} · matching "${query}"`;
-    } else if (filter !== "All") {
-      text = `Showing ${shown} of ${total} · ${filter}`;
-    } else if (shown === total) {
-      text = `${total} public repositories`;
-    } else {
-      text = `Showing ${shown} of ${total}`;
+  function renderRepos() {
+    const summary = $("repos-summary");
+    const gs = github?.stats || {};
+    const rs = repos?.stats || {};
+    if (summary) {
+      summary.textContent = `${rs.public || 0} public repositories · ${fmtNum(gs.totalStars || rs.totalStars || 0)} stars · ${rs.languages || 0} languages`;
     }
-    els.repoCount.textContent = text;
-  }
 
-  function featuredHeroCard(repo) {
-    const meta = FEATURED_META[repo.name] || {};
-    const desc = meta.tagline || repo.description || "Open-source project";
-    const accent = meta.accent || "#8b5cf6";
-    const fb = escapeHtml(repo.fallback || repo.cover);
-    const cover = escapeHtml(repo.cover);
-    const catIcon = icons ? icons.categoryIcon(repo.category) : "";
-    return `
-      <a class="feat-hero" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--feat-accent:${escapeHtml(accent)}">
-        <div class="feat-hero-media">
-          <img src="${cover}" alt="" loading="lazy" data-fallback="${fb}" />
-          <span class="feat-hero-badge">Flagship</span>
-        </div>
-        <div class="feat-hero-body">
-          <div class="feat-meta-row">
-            <span class="feat-cat">${catIcon}<span>${escapeHtml(repo.category)}</span></span>
-            ${repo.language ? `<span class="feat-lang">${escapeHtml(repo.language)}</span>` : ""}
-          </div>
-          <h3 class="feat-hero-title">${escapeHtml(repo.name)}</h3>
-          <p class="feat-hero-desc">${escapeHtml(desc)}</p>
-          <span class="feat-cta">View on GitHub ${arrowSvg()}</span>
-        </div>
-      </a>`;
-  }
-
-  function featuredCard(repo, index) {
-    const meta = FEATURED_META[repo.name] || {};
-    const desc = meta.tagline || repo.description || "Open-source project";
-    const accent = meta.accent || "#8b5cf6";
-    const fb = escapeHtml(repo.fallback || repo.cover);
-    const cover = escapeHtml(repo.cover);
-    const catIcon = icons ? icons.categoryIcon(repo.category) : "";
-    const shortDesc = desc.length > 90 ? desc.slice(0, 87) + "…" : desc;
-    return `
-      <a class="feat-card" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--feat-accent:${escapeHtml(accent)};--i:${index}">
-        <div class="feat-card-accent" aria-hidden="true"></div>
-        <div class="feat-card-thumb">
-          <img src="${cover}" alt="" loading="lazy" data-fallback="${fb}" />
-        </div>
-        <div class="feat-card-body">
-          <div class="feat-meta-row">
-            <span class="feat-cat">${catIcon}<span>${escapeHtml(repo.category)}</span></span>
-            ${repo.language ? `<span class="feat-lang">${escapeHtml(repo.language)}</span>` : ""}
-          </div>
-          <h3 class="feat-card-title">${escapeHtml(repo.name)}</h3>
-          <p class="feat-card-desc">${escapeHtml(shortDesc)}</p>
-          <span class="feat-cta feat-cta--sm">Open repo ${arrowSvg()}</span>
-        </div>
-      </a>`;
-  }
-
-  function renderFeatured() {
-    if (!els.featured) return;
-    const pv = DATA.repos.find((r) => r.name === "promptvault");
-    const picks = ["discope", "bruos", "developers-cheat-sheet"]
-      .map((n) => DATA.repos.find((r) => r.name === n))
-      .filter(Boolean);
-
-    let html = "";
-    if (pv) html += featuredHeroCard(pv);
-    if (picks.length) {
-      html += `<div class="feat-row">${picks.map((r, i) => featuredCard(r, i)).join("")}</div>`;
-    }
-    els.featured.innerHTML = html;
-    initImageFallbacks(els.featured);
-  }
-
-  function repoCard(repo, index) {
-    const starBadge = isFeatured(repo) && icons
-      ? `<span class="badge badge--featured">${icons.icon("star", "badge-star")} Featured</span>`
-      : isFeatured(repo)
-        ? `<span class="badge badge--featured">Featured</span>`
-        : "";
-    return `
-      <a class="repo-card" role="listitem" href="${escapeHtml(repo.url)}" target="_blank" rel="noopener" style="--i:${index}">
-        ${montageHtml(repo)}
-        <div class="repo-body">
-          <div class="repo-head">
-            <h3 class="repo-name">${escapeHtml(repo.name)}</h3>
-            ${extSvg()}
-          </div>
-          <div class="repo-badges">
-            ${starBadge}
-            ${repo.language ? `<span class="badge badge--lang">${escapeHtml(repo.language)}</span>` : ""}
-            <span class="badge">${escapeHtml(repo.category)}</span>
-          </div>
-          <p class="repo-desc">${escapeHtml(repo.description || "No description.")}</p>
-          <div class="repo-meta">Updated ${escapeHtml(formatDate(repo.updatedAt))}</div>
-        </div>
-      </a>`;
-  }
-
-  function renderGrid() {
-    const query = els.search.value.trim();
-    const results = DATA.repos
+    const query = ($("repo-search")?.value || "").trim();
+    const results = (repos?.repos || [])
       .map((r) => scoreRepo(r, query))
       .filter(Boolean)
-      .sort((a, b) => b.score - a.score || new Date(b.repo.updatedAt) - new Date(a.repo.updatedAt));
+      .sort((a, b) => b.repo.stars - a.repo.stars || new Date(b.repo.updatedAt) - new Date(a.repo.updatedAt));
 
-    els.grid.innerHTML = results.map((r, i) => repoCard(r.repo, i)).join("");
-    els.empty.classList.toggle("hidden", results.length > 0);
-    updateRepoCount(results.length, DATA.stats.total, activeFilter, query);
-    initImageFallbacks(els.grid);
-    initCardTilt(els.grid.querySelectorAll(".repo-card"));
+    const grid = $("repo-grid");
+    if (grid) {
+      grid.innerHTML = results
+        .map(
+          (r, i) => `
+        <a class="repo-card" role="listitem" href="${esc(r.repo.url)}" target="_blank" rel="noopener" style="--i:${i}">
+          <div class="repo-thumb">
+            <img src="${esc(r.repo.cover)}" alt="" loading="lazy" data-fallback="${esc(r.repo.fallback || "")}" />
+          </div>
+          <div class="repo-body">
+            <div class="repo-head">
+              <h3 class="repo-name">${esc(r.repo.name)}</h3>
+              <svg class="repo-ext" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </div>
+            <div class="repo-meta-row">
+              ${r.repo.language ? `<span class="repo-pill">${esc(r.repo.language)}</span>` : ""}
+              <span class="repo-pill">${esc(r.repo.category)}</span>
+              ${r.repo.stars ? `<span class="repo-pill repo-pill--stars">${r.repo.stars} ★</span>` : ""}
+            </div>
+            <p class="repo-desc">${esc(r.repo.description || "Open-source project")}</p>
+            <div class="repo-date">Updated ${esc(fmtDate(r.repo.updatedAt))}</div>
+          </div>
+        </a>`
+        )
+        .join("");
+    }
+
+    const count = $("repo-count");
+    if (count) {
+      const total = repos?.repos?.length || 0;
+      if (query) count.textContent = `Showing ${results.length} of ${total} · matching "${query}"`;
+      else if (activeFilter !== "All") count.textContent = `Showing ${results.length} of ${total} · ${activeFilter}`;
+      else count.textContent = `${total} public repositories`;
+    }
+
+    $("repo-empty")?.classList.toggle("hidden", results.length > 0);
+    initImageFallbacks(grid);
   }
 
-  function render() {
-    renderGrid();
+  /* ---- Render: Expertise ---- */
+  function renderExpertise() {
+    const grid = $("expertise-grid");
+    if (!grid || !expertise?.items) return;
+    grid.innerHTML = expertise.items
+      .map(
+        (e, i) => `
+      <article class="expertise-card" style="--i:${i}">
+        ${icons ? icons.icon(e.icon || "folder", "expertise-icon") : ""}
+        <h3 class="expertise-title">${esc(e.title)}</h3>
+        <p class="expertise-desc">${esc(e.description)}</p>
+      </article>`
+      )
+      .join("");
   }
 
+  /* ---- Render: Timeline ---- */
+  function renderTimeline() {
+    const el = $("timeline");
+    if (!el || !timeline?.items) return;
+    el.innerHTML = timeline.items
+      .map(
+        (t, i) => `
+      <article class="timeline-item" style="--i:${i}">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <p class="timeline-period">${esc(t.period)}</p>
+        <h3 class="timeline-title">${esc(t.title)}</h3>
+        <p class="timeline-company">${esc(t.company)}</p>
+        <ul class="timeline-achievements">${(t.achievements || []).map((a) => `<li>${esc(a)}</li>`).join("")}</ul>
+        <p class="timeline-impact">${esc(t.impact)}</p>
+      </article>`
+      )
+      .join("");
+  }
+
+  /* ---- Render: Gallery ---- */
+  function renderGallery() {
+    const grid = $("gallery-grid");
+    if (!grid || !gallery?.items) return;
+    grid.innerHTML = gallery.items
+      .map(
+        (g, i) => `
+      <button class="gallery-item" type="button" style="--i:${i}"
+        data-src="${esc(g.image)}" data-caption="${esc(g.caption)}" data-title="${esc(g.title)}">
+        <div class="gallery-thumb">
+          <img src="${esc(g.image)}" alt="${esc(g.title)}" loading="lazy" />
+        </div>
+        <div class="gallery-info">
+          <p class="gallery-cat">${esc(g.category)}</p>
+          <h3 class="gallery-title">${esc(g.title)}</h3>
+        </div>
+      </button>`
+      )
+      .join("");
+
+    grid.querySelectorAll(".gallery-item").forEach((btn) => {
+      btn.addEventListener("click", () => openModal(btn.dataset.src, btn.dataset.caption || btn.dataset.title));
+    });
+  }
+
+  function openModal(src, caption) {
+    const modal = $("gallery-modal");
+    const img = $("modal-img");
+    const cap = $("modal-caption");
+    if (!modal || !img) return;
+    img.src = src;
+    img.alt = caption || "";
+    if (cap) cap.textContent = caption || "";
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    $("gallery-modal")?.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  /* ---- Render: Testimonials ---- */
+  function renderTestimonials() {
+    const section = $("testimonials");
+    const grid = $("testimonial-grid");
+    if (!section || !grid || !testimonials?.items?.length) return;
+    section.classList.add("has-content");
+    section.classList.remove("hidden-section");
+    grid.innerHTML = testimonials.items
+      .map(
+        (t, i) => `
+      <article class="testimonial-card" style="--i:${i}">
+        <p class="testimonial-quote">${esc(t.quote)}</p>
+        <p class="testimonial-name">${esc(t.name)}</p>
+        <p class="testimonial-role">${esc(t.role)} · ${esc(t.company)}</p>
+      </article>`
+      )
+      .join("");
+  }
+
+  /* ---- Render: Thought Leadership ---- */
+  function renderThoughts() {
+    const section = $("thought-leadership");
+    const grid = $("thought-grid");
+    if (!section || !grid || !thoughts?.items?.length) return;
+    section.classList.add("has-content");
+    section.classList.remove("hidden-section");
+    grid.innerHTML = thoughts.items
+      .map(
+        (t, i) => `
+      <a class="thought-card" href="${esc(t.url)}" target="_blank" rel="noopener" style="--i:${i}">
+        <span class="thought-type">${esc(t.type)}</span>
+        <h3 class="thought-title">${esc(t.title)}</h3>
+        <p class="thought-excerpt">${esc(t.excerpt)}</p>
+        <span class="thought-date">${esc(t.date)}</span>
+      </a>`
+      )
+      .join("");
+  }
+
+  /* ---- Render: Contact ---- */
+  function renderContact() {
+    const el = $("contact-actions");
+    const c = profile.contact || {};
+    if (!el) return;
+    el.innerHTML = `
+      ${c.linkedin ? `<a class="btn btn-primary" href="${esc(c.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ""}
+      ${c.github ? `<a class="btn btn-outline" href="${esc(c.github)}" target="_blank" rel="noopener">GitHub</a>` : ""}
+      ${c.email ? `<a class="btn btn-outline" href="${esc(c.email)}">Email</a>` : ""}`;
+  }
+
+  /* ---- Utilities ---- */
   function initImageFallbacks(root) {
     if (!root) return;
     root.querySelectorAll("img[data-fallback]").forEach((img) => {
-      img.addEventListener("error", function onErr() {
-        if (this.dataset.fallback && this.src !== this.dataset.fallback) {
-          this.src = this.dataset.fallback;
-        }
-        this.removeEventListener("error", onErr);
+      img.addEventListener("error", function () {
+        if (this.dataset.fallback && this.src !== this.dataset.fallback) this.src = this.dataset.fallback;
       }, { once: true });
     });
   }
 
-  /* ---- scroll reveal ---- */
   function initScrollReveal() {
     const targets = document.querySelectorAll(".reveal, .reveal-stagger");
     if (reducedMotion) {
@@ -344,119 +391,124 @@
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) e.target.classList.add("is-visible");
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            if (e.target.id === "engineering" || e.target.closest("#engineering")) animateImpact();
+          }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
-    targets.forEach((el) => {
-      if (!el.classList.contains("hero-content")) io.observe(el);
+    targets.forEach((el) => io.observe(el));
+    io.observe($("engineering"));
+  }
+
+  function animateImpact() {
+    if (countersDone || reducedMotion) return;
+    countersDone = true;
+    document.querySelectorAll(".impact-value[data-target]").forEach((el) => {
+      const target = parseInt(el.dataset.target, 10);
+      if (!target || el.textContent.includes("+")) return;
+      const dur = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmtNum(Math.round(target * ease));
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     });
   }
 
-  /* ---- nav spy ---- */
-  function initNavSpy() {
+  function initNav() {
+    const header = $("site-header");
     const links = document.querySelectorAll(".nav-link[data-section]");
     const sections = [...links].map((l) => document.getElementById(l.dataset.section)).filter(Boolean);
 
-    function update() {
-      const scrollY = window.scrollY + varNavH() + 20;
+    function onScroll() {
+      const y = window.scrollY + 80;
       let current = sections[0]?.id || "hero";
-      sections.forEach((sec) => {
-        if (sec.offsetTop <= scrollY) current = sec.id;
-      });
+      sections.forEach((s) => { if (s.offsetTop <= y) current = s.id; });
       links.forEach((l) => l.classList.toggle("active", l.dataset.section === current));
-      els.siteNav.classList.toggle("scrolled", window.scrollY > 40);
+      header?.classList.toggle("scrolled", window.scrollY > 20);
     }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
 
-    window.addEventListener("scroll", update, { passive: true });
-    update();
-  }
-
-  function varNavH() {
-    return parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 64;
-  }
-
-  /* ---- parallax ---- */
-  function initParallax() {
-    if (reducedMotion) return;
-    window.addEventListener(
-      "scroll",
-      () => {
-        const y = window.scrollY;
-        if (els.heroParallax) els.heroParallax.style.transform = `translateY(${y * 0.35}px)`;
-        if (els.parallaxOrbs) els.parallaxOrbs.style.transform = `translateY(${y * 0.15}px)`;
-      },
-      { passive: true }
-    );
-  }
-
-  /* ---- card tilt ---- */
-  function initCardTilt(cards) {
-    if (reducedMotion || !window.matchMedia("(pointer: fine)").matches) return;
-    cards.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`;
-      });
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "";
-      });
+    $("nav-toggle")?.addEventListener("click", () => {
+      const nav = document.querySelector(".nav");
+      const open = nav?.classList.toggle("open");
+      $("nav-toggle")?.setAttribute("aria-expanded", open ? "true" : "false");
     });
   }
 
-  /* ---- theme ---- */
-  const THEME_KEY = "noncent-theme";
-  function setTheme(t) {
-    document.documentElement.setAttribute("data-theme", t);
-    try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
+  /* ---- Events ---- */
+  function bindEvents() {
+    $("repo-filters")?.addEventListener("click", (e) => {
+      const chip = e.target.closest(".filter-chip");
+      if (!chip) return;
+      activeFilter = chip.dataset.filter;
+      renderRepoFilters();
+      renderRepos();
+    });
+
+    $("repo-search")?.addEventListener("input", renderRepos);
+
+    $("gallery-modal")?.querySelector(".modal-close")?.addEventListener("click", closeModal);
+    $("gallery-modal")?.addEventListener("click", (e) => { if (e.target.id === "gallery-modal") closeModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
   }
-  function toggleTheme() {
-    setTheme(document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light");
-  }
-  if (els.themeToggle) els.themeToggle.addEventListener("click", toggleTheme);
 
-  /* ---- events ---- */
-  els.chips.addEventListener("click", (e) => {
-    const chip = e.target.closest(".chip");
-    if (!chip) return;
-    activeFilter = chip.dataset.filter;
-    renderChips();
-    render();
-  });
-  els.search.addEventListener("input", render);
+  /* ---- Boot ---- */
+  async function boot() {
+    try {
+      const [p, pr, ex, tl, te, th, ga, gh, re] = await Promise.all([
+        fetch("data/profile.json").then((r) => r.json()),
+        fetch("data/projects.json").then((r) => r.json()),
+        fetch("data/expertise.json").then((r) => r.json()),
+        fetch("data/timeline.json").then((r) => r.json()),
+        fetch("data/testimonials.json").then((r) => r.json()),
+        fetch("data/thought-leadership.json").then((r) => r.json()),
+        fetch("data/gallery.json").then((r) => r.json()),
+        fetch("data/github.json").then((r) => r.json()),
+        fetch("data/repos.json").then((r) => r.json()),
+      ]);
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "/" && document.activeElement !== els.search) {
-      e.preventDefault();
-      els.search.focus();
-    } else if (e.key === "Escape" && document.activeElement === els.search) {
-      els.search.value = "";
-      render();
-    } else if ((e.key === "t" || e.key === "T") && document.activeElement !== els.search) {
-      toggleTheme();
-    }
-  });
+      profile = p;
+      projects = pr;
+      expertise = ex;
+      timeline = tl;
+      testimonials = te;
+      thoughts = th;
+      gallery = ga;
+      github = gh;
+      repos = re;
 
-  /* ---- boot ---- */
-  initStatIcons();
-  fetch("data/repos.json")
-    .then((r) => r.json())
-    .then((json) => {
-      DATA = json;
-      if (els.pillarRepoCount) els.pillarRepoCount.textContent = DATA.stats.total;
-      applyStats(false);
-      initStatsObserver();
-      renderChips();
+      document.title = `${profile.name} — Solution Architect & Engineering Leader`;
+      $("footer-year").textContent = new Date().getFullYear();
+
+      renderHero();
+      renderAbout();
       renderFeatured();
-      render();
+      renderEngineering();
+      renderRepoFilters();
+      renderRepos();
+      renderExpertise();
+      renderTimeline();
+      renderGallery();
+      renderTestimonials();
+      renderThoughts();
+      renderContact();
+
       initScrollReveal();
-      initNavSpy();
-      initParallax();
-    })
-    .catch((err) => {
-      els.grid.innerHTML = `<p class="empty">Failed to load: ${escapeHtml(err.message)}</p>`;
-    });
+      initNav();
+      bindEvents();
+    } catch (err) {
+      console.error(err);
+      $("repo-grid").innerHTML = `<p class="empty-state">Failed to load portfolio data.</p>`;
+    }
+  }
+
+  boot();
 })();

@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "title": "Senior Solution Architect & Technical Leader",
+      "company": "Enterprise Hospitality & Digital",
+      "period": "2018 — Present",
+      "achievements": [
+        "Led architecture for multi-property digital platform serving millions of guests annually",
+        "Defined cloud migration strategy and microservices decomposition roadmap",
+        "Established engineering standards, code review practices and architecture review board"
+      ],
+      "impact": "Reduced platform incident rate by 35% while accelerating feature delivery across 10+ brands."
+    },
+    {
+      "title": "Technical Architect",
+      "company": "Global Digital Agency",
+      "period": "2014 — 2018",
+      "achievements": [
+        "Architected headless CMS and composable commerce solutions for Fortune 500 clients",
+        "Led cross-functional teams of 15–25 engineers across PHP, JavaScript and cloud stacks",
+        "Delivered performance optimisation programmes achieving sub-2s LCP across properties"
+      ],
+      "impact": "Won 3 consecutive agency excellence awards for technical delivery and innovation."
+    },
+    {
+      "title": "Lead Developer & Solutions Consultant",
+      "company": "Independent / Contract",
+      "period": "2008 — 2014",
+      "achievements": [
+        "Built scalable PHP/MySQL platforms for e-commerce, social and content verticals",
+        "Open-sourced widely-adopted libraries including PDO wrapper (600+ stars aggregate)",
+        "Consulted on security hardening, API design and database architecture"
+      ],
+      "impact": "Delivered 30+ production systems with combined reach exceeding 2M active users."
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Product & Services Firms",
+      "period": "2004 — 2008",
+      "achievements": [
+        "Full-stack development across LAMP stack, early AJAX SPAs and CMS customisation",
+        "Introduced automated testing and version control practices to delivery teams",
+        "Built internal tooling reducing deployment time from hours to minutes"
+      ],
+      "impact": "Foundation years establishing deep expertise in web platform engineering."
+    }
+  ]
+}

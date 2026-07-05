@@ -1,0 +1,16 @@
+{
+  "items": [
+    { "icon": "layers", "title": "Solution Architecture", "description": "End-to-end solution design aligning business capabilities with technical delivery." },
+    { "icon": "globe", "title": "Enterprise Architecture", "description": "Governance frameworks, integration patterns and platform roadmaps at scale." },
+    { "icon": "cpu", "title": "Cloud Architecture", "description": "Cloud-native design on AWS, Azure and GCP with IaC and cost optimisation." },
+    { "icon": "package", "title": "Digital Platforms", "description": "Composable platforms powering multi-brand, multi-channel digital experiences." },
+    { "icon": "bot", "title": "AI Solutions", "description": "LLM integration, conversational AI, and intelligent automation pipelines." },
+    { "icon": "folder", "title": "Headless CMS", "description": "Decoupled content architectures with editorial workflow and API-first delivery." },
+    { "icon": "users", "title": "Engineering Leadership", "description": "Building high-performing teams, mentoring architects and driving delivery." },
+    { "icon": "code", "title": "Microservices", "description": "Domain-driven decomposition, event-driven patterns and API gateway strategies." },
+    { "icon": "wrench", "title": "DevOps", "description": "CI/CD pipelines, infrastructure automation and release engineering." },
+    { "icon": "zap", "title": "Platform Engineering", "description": "Internal developer platforms, golden paths and self-service infrastructure." },
+    { "icon": "star", "title": "Performance Optimisation", "description": "Core Web Vitals, caching strategies and system-level performance tuning." },
+    { "icon": "shield", "title": "Security & Governance", "description": "Zero-trust patterns, compliance frameworks and secure SDLC practices." }
+  ]
+}

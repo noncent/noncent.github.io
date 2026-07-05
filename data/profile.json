@@ -1,0 +1,35 @@
+{
+  "name": "Neeraj Singh",
+  "title": "Senior Solution Architect · Technical Leader",
+  "headline": [
+    "Building Digital Platforms,",
+    "Solving Complex Problems,",
+    "Leading Engineering Excellence."
+  ],
+  "subheadline": "Senior Solution Architect and Technical Leader with 20+ years of experience designing scalable enterprise platforms, cloud-native architectures, AI solutions and digital transformation programmes.",
+  "about": {
+    "intro": "I architect and deliver enterprise-grade digital platforms that balance business velocity with engineering rigour — from cloud-native microservices and headless CMS ecosystems to AI-powered automation at scale.",
+    "pillars": [
+      "Enterprise platform architecture & digital transformation",
+      "Cloud-native systems on AWS, Azure & GCP",
+      "AI solutions, conversational interfaces & LLM integration",
+      "Headless CMS, composable commerce & content platforms",
+      "Engineering leadership, team scaling & delivery excellence"
+    ]
+  },
+  "stats": [
+    { "value": "20+", "label": "Years Experience" },
+    { "value": "63+", "label": "Repositories" },
+    { "value": "100+", "label": "Projects Delivered" },
+    { "value": "Millions", "label": "Users Impacted" }
+  ],
+  "contact": {
+    "linkedin": "https://www.linkedin.com/in/neeraj-singh",
+    "github": "https://github.com/noncent",
+    "email": "mailto:hello@noncent.dev"
+  },
+  "engineeringImpact": {
+    "headline": "Engineering Through Code.",
+    "subheadline": "A collection of architecture patterns, enterprise solutions, AI experiments, platform accelerators and production-grade systems built across my career."
+  }
+}

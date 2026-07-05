@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-07-05T08:30:24.408Z",
+  "owner": "noncent",
+  "profileUrl": "https://github.com/noncent",
+  "stats": {
+    "publicRepos": 46,
+    "totalRepos": 51,
+    "totalStars": 683,
+    "totalForks": 170,
+    "contributions": 1235,
+    "yearsActive": 14,
+    "languages": 9
+  },
+  "languageBreakdown": [
+    {
+      "name": "PHP",
+      "count": 19,
+      "pct": 41
+    },
+    {
+      "name": "JavaScript",
+      "count": 7,
+      "pct": 15
+    },
+    {
+      "name": "TypeScript",
+      "count": 3,
+      "pct": 7
+    },
+    {
+      "name": "Batchfile",
+      "count": 3,
+      "pct": 7
+    },
+    {
+      "name": "HTML",
+      "count": 2,
+      "pct": 4
+    },
+    {
+      "name": "Swift",
+      "count": 1,
+      "pct": 2
+    },
+    {
+      "name": "Rust",
+      "count": 1,
+      "pct": 2
+    },
+    {
+      "name": "Vue",
+      "count": 1,
+      "pct": 2
+    },
+    {
+      "name": "Python",
+      "count": 1,
+      "pct": 2
+    }
+  ],
+  "earliestRepo": "2012-01-25T15:11:17.000Z"
+}

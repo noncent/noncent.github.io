@@ -1,23 +1,17 @@
-# noncent.github.io — Portfolio SPA
+# noncent.github.io — Premium Executive Portfolio
 
-Scroll-driven portfolio dashboard at **https://noncent.github.io/** showcasing 46 public open-source repositories.
+Personal portfolio for **Neeraj Singh** — Senior Solution Architect & Engineering Leader.
 
-## Features
+Live: **https://noncent.github.io/**
 
-- Full-viewport hero with parallax and CTAs
-- Scroll-triggered section animations (Intersection Observer)
-- Animated stat counters
-- Bento featured grid + searchable repo library
-- Light/dark theme, 3D card tilt on hover
-- Category filters and fuzzy search
-
-## Refresh repo data
+## Sync data
 
 ```bash
 node scripts/sync-repos.mjs
+node scripts/sync-github-stats.mjs
 ```
 
-Requires authenticated `gh` CLI. Only **public** repos are synced.
+Requires authenticated `gh` CLI. Syncs public repos, stars, forks, and language breakdown.
 
 ## Local preview
 
@@ -25,3 +19,10 @@ Requires authenticated `gh` CLI. Only **public** repos are synced.
 python3 -m http.server 8788
 # open http://localhost:8788
 ```
+
+## Content
+
+Edit JSON files in `data/` — `profile.json`, `projects.json`, `timeline.json`, etc.
+
+Add headshot: `assets/profile.jpg`
+

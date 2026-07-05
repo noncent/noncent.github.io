@@ -34,6 +34,66 @@
     default: "folder",
   };
 
+  const LANG_META = {
+    php: {
+      color: "#777BB4",
+      path: `<ellipse cx="12" cy="14" rx="7" ry="5"/><circle cx="12" cy="8" r="4"/><path d="M9 7h1.5l.5 2M13 7h1.5l-.5 2" fill="#fff"/>`,
+    },
+    javascript: {
+      color: "#F7DF1E",
+      path: `<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8l-2 4 2 4M16 8l2 4-2 4M11 7l-2 10" stroke="#000" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
+    },
+    typescript: {
+      color: "#3178C6",
+      path: `<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8h3a2.5 2.5 0 010 5H9v3H8V8zm1 4h2a1.5 1.5 0 000-3H9v3zm6-4h-3v8h3a2.5 2.5 0 000-5h-2V8z" fill="#fff"/>`,
+    },
+    html: {
+      color: "#E34F26",
+      path: `<path d="M4 3l1.5 17 6.5 2 6.5-2L20 3H4zm3.2 4.5h7.1l-.4 4.2H8.8l.2 2.5 3 1 .3-.1.3 3.2-2.6.8-2.6-.8-.2-2h2.6l.1 1.2 1.4.4 1.4-.4.2-2.2H9.4l-.4-5.3z"/>`,
+    },
+    swift: {
+      color: "#F05138",
+      path: `<path d="M4 16c3-4 6-6 10-8 2-1 4-1 6 0-3 2-5 4-7 7-2 2-5 4-9 5z"/><path d="M6 18c2-2 5-4 8-5 2-.5 4-.5 5 0-2 1-4 2-6 4-1.5 1.5-3.5 2.5-7 3z" opacity=".7"/>`,
+    },
+    rust: {
+      color: "#DEA584",
+      path: `<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1l2.1-2.1M17 7l2.1-2.1"/>`,
+    },
+    vue: {
+      color: "#42B883",
+      path: `<path d="M12 4l9 16H3L12 4z"/><path d="M12 9l4 7H8l4-7z" fill="#35495E"/>`,
+    },
+    python: {
+      color: "#3776AB",
+      path: `<path d="M9 4h6v3H11v2h5a3 3 0 013 3v2H9v-2h6v-2h-4a3 3 0 01-3-3V7a3 3 0 013-3z"/><circle cx="10" cy="6" r="1" fill="#FFD43B"/><circle cx="15" cy="17" r="1" fill="#FFD43B"/>`,
+    },
+    batchfile: {
+      color: "#4D4D4D",
+      path: `<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h6M7 12h4M7 15h8" stroke="#fff" stroke-width="1.5" fill="none"/>`,
+    },
+    default: {
+      color: "#2563eb",
+      path: `<path d="M8 7l-4 5 4 5M16 7l4 5-4 5M14 5l-4 14"/>`,
+    },
+  };
+
+  function normalizeLang(name) {
+    return String(name || "")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "");
+  }
+
+  function langColor(name) {
+    return (LANG_META[normalizeLang(name)] || LANG_META.default).color;
+  }
+
+  function langIcon(name, className) {
+    const meta = LANG_META[normalizeLang(name)] || LANG_META.default;
+    const cls = className ? ` class="${className}"` : "";
+    return `<svg${cls} viewBox="0 0 24 24" aria-hidden="true" fill="${meta.color}">${meta.path}</svg>`;
+  }
+
   function icon(name, className) {
     const p = paths[name];
     if (!p) return "";
@@ -43,10 +103,13 @@
 
   global.NONCENT_ICONS = {
     icon,
+    langIcon,
+    langColor,
     categoryIcon(cat) {
       return icon(categoryIcons[cat] || categoryIcons.default, "chip-icon");
     },
     paths,
     categoryIcons,
+    LANG_META,
   };
 })(typeof window !== "undefined" ? window : globalThis);

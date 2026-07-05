@@ -7,6 +7,7 @@
   let profile, projects, expertise, timeline, testimonials, thoughts, gallery, github, stackoverflow, repos;
   let activeFilter = "All";
   let countersDone = false;
+  let langBarsDone = false;
   const DEFAULT_IMG = "assets/covers/default.jpg";
   const PHOTO_FALLBACKS = ["git-profile.jpg", "git-profile.png", "dist/img/profile.jpg"];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -164,17 +165,24 @@
     if (lb && breakdown.length) {
       lb.innerHTML = `
         <h3>Most Used Languages</h3>
-        <div class="lang-bars">
+        <div class="lang-bars reveal-stagger">
           ${breakdown
             .slice(0, 6)
-            .map(
-              (l) => `
-            <div class="lang-bar-row">
-              <span class="lang-bar-name">${esc(l.name)}</span>
-              <div class="lang-bar-track"><div class="lang-bar-fill" style="width:${l.pct}%"></div></div>
+            .map((l, i) => {
+              const color = icons?.langColor ? icons.langColor(l.name) : "#2563eb";
+              const iconSvg = icons?.langIcon ? icons.langIcon(l.name) : "";
+              return `
+            <div class="lang-bar-row" style="--i:${i}" data-pct="${l.pct}">
+              <div class="lang-bar-meta">
+                <span class="lang-bar-icon" style="--lang-color:${esc(color)}">${iconSvg}</span>
+                <span class="lang-bar-name">${esc(l.name)}</span>
+              </div>
+              <div class="lang-bar-track">
+                <div class="lang-bar-fill" style="--pct:${l.pct}; --lang-color:${esc(color)}"></div>
+              </div>
               <span class="lang-bar-pct">${l.pct}%</span>
-            </div>`
-            )
+            </div>`;
+            })
             .join("")}
         </div>`;
     }
@@ -409,6 +417,7 @@
     const targets = document.querySelectorAll(".reveal, .reveal-stagger");
     if (reducedMotion) {
       targets.forEach((el) => el.classList.add("is-visible"));
+      document.querySelector(".lang-bars")?.classList.add("is-animated");
       return;
     }
     const io = new IntersectionObserver(
@@ -416,7 +425,10 @@
         entries.forEach((e) => {
           if (e.isIntersecting) {
             e.target.classList.add("is-visible");
-            if (e.target.id === "engineering" || e.target.closest("#engineering")) animateImpact();
+            if (e.target.id === "engineering" || e.target.closest("#engineering")) {
+              animateImpact();
+              animateLangBars();
+            }
           }
         });
       },
@@ -424,6 +436,13 @@
     );
     targets.forEach((el) => io.observe(el));
     io.observe($("engineering"));
+  }
+
+  function animateLangBars() {
+    const bars = document.querySelector(".lang-bars");
+    if (!bars || langBarsDone) return;
+    langBarsDone = true;
+    bars.classList.add("is-animated");
   }
 
   function animateImpact() {

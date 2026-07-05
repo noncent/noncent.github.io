@@ -1,32 +1,54 @@
 {
+  "source": "https://medium.com/@neerajsinghsonu",
+  "generatedAt": "2026-07-05T11:10:09.696Z",
   "items": [
     {
       "type": "article",
-      "title": "Headless CMS Architecture Patterns for Enterprise",
-      "date": "2024",
-      "excerpt": "Composable content strategies that decouple editorial workflows from presentation without sacrificing governance.",
-      "url": "#thought-leadership"
-    },
-    {
-      "type": "talk",
-      "title": "From Monolith to Microservices — A Pragmatic Migration Path",
-      "date": "2023",
-      "excerpt": "Conference talk on strangler fig patterns, domain boundaries and avoiding the distributed monolith trap.",
-      "url": "#thought-leadership"
-    },
-    {
-      "type": "blog",
-      "title": "Core Web Vitals in Production — Lessons from Lighthouse at Scale",
-      "date": "2022",
-      "excerpt": "Operationalising performance budgets across large content platforms with measurable business impact.",
-      "url": "https://noncent.github.io/lighthouse/"
+      "title": "Drupal S3FS: Thumbnails Not Working? The Real Fix with AWS Block Public Access",
+      "date": "Feb 2026",
+      "excerpt": "Image Source: ChatGPT (AI Generated) How to Configure AWS S3 for Drupal Media Without Breaking Thumbnails If you’ve ever configured S3FS in Drupal and thought “…",
+      "url": "https://medium.com/@neerajsinghsonu/drupal-s3fs-thumbnails-not-working-the-real-fix-with-aws-block-public-access-3a260c718a00",
+      "category": "devops"
     },
     {
       "type": "article",
-      "title": "AI Integration Patterns for Existing Platforms",
-      "date": "2025",
-      "excerpt": "Practical approaches to embedding LLM capabilities into established enterprise systems without re-architecting everything.",
-      "url": "https://noncent.github.io/promptvault/"
+      "title": "Download Ms Teams videos from Read-Only Recordings (Even with View-Only Permissions!)",
+      "date": "Jul 2024",
+      "excerpt": "Created using AI tool: openart.ai Having trouble downloading a Microsoft Teams recording you can only view? You’re not alone. By default, Teams doesn’t allow do…",
+      "url": "https://medium.com/@neerajsinghsonu/download-read-only-microsoft-teams-recordings-even-with-view-only-permissions-fadda07f0e8e",
+      "category": "article"
+    },
+    {
+      "type": "article",
+      "title": "How to delete multiple path aliases for Published Nodes in Drupal 9?",
+      "date": "Jun 2024",
+      "excerpt": "Image was created using designer.microsoft.com Managing multiple path aliases in a Drupal site can be challenging, especially if many nodes have unnecessary ali…",
+      "url": "https://medium.com/@neerajsinghsonu/how-to-delete-multiple-path-aliases-for-published-nodes-in-drupal-9-7120d832580e",
+      "category": "delete"
+    },
+    {
+      "type": "article",
+      "title": "How to Delete Old Revisions for Each Content Type in Drupal 9?",
+      "date": "Jun 2024",
+      "excerpt": "Delete old Drupal revisions Managing content revisions in Drupal can be a challenge, especially with frequent updates leading to a bloated database. While havin…",
+      "url": "https://medium.com/@neerajsinghsonu/how-to-delete-old-revisions-for-each-content-type-in-drupal-15bad0fdfdd2",
+      "category": "drupal"
+    },
+    {
+      "type": "article",
+      "title": "How to Deploy a React + Vite Site in a Subfolder on Production?",
+      "date": "Jun 2024",
+      "excerpt": "Running Vite in side a sub folder Deploying a React application built with Vite into a subfolder on a production server involves a few configuration steps. Here…",
+      "url": "https://medium.com/@neerajsinghsonu/how-to-deploy-a-react-vite-site-in-a-subfolder-on-production-4170924dccb7",
+      "category": "deployment"
+    },
+    {
+      "type": "article",
+      "title": "Assword vs Password, How hackers trick you into hacking your details?",
+      "date": "Aug 2020",
+      "excerpt": "How hackers trick you into hacking your details? Image credit — https://unsplash.com & Ludovic Toinel Time to read — 5 to 15 minutes. 1. Assword vs Password ASS…",
+      "url": "https://medium.com/@neerajsinghsonu/assword-vs-password-how-hackers-trick-you-into-hacking-your-details-330fd94fb63b",
+      "category": "account-security"
     }
   ]
 }

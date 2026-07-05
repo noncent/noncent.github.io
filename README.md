@@ -9,9 +9,11 @@ Live: **https://noncent.github.io/**
 ```bash
 node scripts/sync-repos.mjs
 node scripts/sync-github-stats.mjs
+node scripts/sync-medium.mjs
+node scripts/sync-stackoverflow.mjs
 ```
 
-Requires authenticated `gh` CLI. Syncs public repos, stars, forks, and language breakdown.
+Requires authenticated `gh` CLI for repo/GitHub sync. Medium and Stack Overflow sync use public RSS/API feeds.
 
 ## Local preview
 

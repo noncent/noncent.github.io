@@ -4,7 +4,7 @@
   const $ = (id) => document.getElementById(id);
   const icons = window.NONCENT_ICONS;
 
-  let profile, projects, expertise, timeline, testimonials, thoughts, gallery, github, repos;
+  let profile, projects, expertise, timeline, testimonials, thoughts, gallery, github, stackoverflow, repos;
   let activeFilter = "All";
   let countersDone = false;
   const DEFAULT_IMG = "assets/covers/default.jpg";
@@ -112,8 +112,10 @@
 
   /* ---- Render: Engineering Impact ---- */
   const IMPACT_ICONS = {
+    ghStars: "star",
+    soRep: "award",
+    soAnswers: "message",
     repos: "folder",
-    stars: "star",
     forks: "code",
     contributions: "zap",
     years: "globe",
@@ -127,9 +129,12 @@
     if (sub) sub.textContent = profile.engineeringImpact?.subheadline || "";
 
     const g = github?.stats || {};
+    const so = stackoverflow || {};
     const cards = [
+      { key: "ghStars", value: g.totalStars || 0, label: "GitHub Stars", href: github?.profileUrl || "https://github.com/noncent" },
+      { key: "soRep", value: so.reputation || 0, label: "Stack Overflow", href: so.profileUrl },
+      { key: "soAnswers", value: so.answers || 0, label: "SO Answers", href: so.profileUrl },
       { key: "repos", value: g.publicRepos || repos?.stats?.public || 0, label: "Total Repositories" },
-      { key: "stars", value: g.totalStars || 0, label: "Total Stars" },
       { key: "forks", value: g.totalForks || 0, label: "Total Forks" },
       { key: "contributions", value: g.contributions || 0, label: "Contributions" },
       { key: "years", value: (g.yearsActive || 0) + "+", label: "Years Active" },
@@ -139,14 +144,18 @@
     const grid = $("impact-grid");
     if (grid) {
       grid.innerHTML = cards
-        .map(
-          (c, i) => `
-        <article class="impact-card" style="--i:${i}">
+        .map((c, i) => {
+          const display = typeof c.value === "number" ? fmtNum(c.value) : esc(String(c.value));
+          const target = typeof c.value === "number" ? c.value : 0;
+          const inner = `
           ${icons ? icons.icon(IMPACT_ICONS[c.key] || "folder", "impact-icon") : ""}
-          <span class="impact-value" data-target="${typeof c.value === "number" ? c.value : 0}">${esc(String(c.value))}</span>
-          <span class="impact-label">${esc(c.label)}</span>
-        </article>`
-        )
+          <span class="impact-value" data-target="${target}">${display}</span>
+          <span class="impact-label">${esc(c.label)}</span>`;
+          if (c.href) {
+            return `<a class="impact-card impact-card--link" href="${esc(c.href)}" target="_blank" rel="noopener" style="--i:${i}">${inner}</a>`;
+          }
+          return `<article class="impact-card" style="--i:${i}">${inner}</article>`;
+        })
         .join("");
     }
 
@@ -477,7 +486,7 @@
   /* ---- Boot ---- */
   async function boot() {
     try {
-      const [p, pr, ex, tl, te, th, ga, gh, re] = await Promise.all([
+      const [p, pr, ex, tl, te, th, ga, gh, so, re] = await Promise.all([
         fetch("data/profile.json").then((r) => r.json()),
         fetch("data/projects.json").then((r) => r.json()),
         fetch("data/expertise.json").then((r) => r.json()),
@@ -486,6 +495,7 @@
         fetch("data/thought-leadership.json").then((r) => r.json()),
         fetch("data/gallery.json").then((r) => r.json()),
         fetch("data/github.json").then((r) => r.json()),
+        fetch("data/stackoverflow.json").then((r) => r.json()),
         fetch("data/repos.json").then((r) => r.json()),
       ]);
 
@@ -497,6 +507,7 @@
       thoughts = th;
       gallery = ga;
       github = gh;
+      stackoverflow = so;
       repos = re;
 
       document.title = `${profile.name} — Solution Architect & Engineering Leader`;

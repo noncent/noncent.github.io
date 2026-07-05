@@ -9,31 +9,31 @@
     {
       "title": "Enterprise Integration Landscape",
       "category": "Enterprise Ecosystem",
-      "image": "assets/covers/devtools.png",
+      "image": "assets/covers/devtools.jpg",
       "caption": "API-first integration hub connecting CRM, CMS, booking and analytics systems."
     },
     {
       "title": "Cloud-Native Reference Architecture",
       "category": "Cloud Architecture",
-      "image": "assets/covers/javascript.png",
+      "image": "assets/covers/javascript.jpg",
       "caption": "Multi-AZ deployment with CDN edge, container orchestration and managed data stores."
     },
     {
       "title": "Microservices Domain Map",
       "category": "Platform Architecture",
-      "image": "assets/covers/security.png",
+      "image": "assets/covers/security.jpg",
       "caption": "Domain-driven service boundaries with event bus and API gateway layer."
     },
     {
       "title": "Headless Content Delivery",
       "category": "Integration Landscape",
-      "image": "assets/covers/mobile.png",
+      "image": "assets/covers/mobile.jpg",
       "caption": "Content API feeding web, mobile app, partner channels and personalisation engine."
     },
     {
       "title": "AI Conversational Flow",
       "category": "AI Architecture",
-      "image": "assets/covers/ai-tools.png",
+      "image": "assets/covers/ai-tools.jpg",
       "caption": "Multi-channel NLU pipeline with human handoff and context preservation."
     }
   ]

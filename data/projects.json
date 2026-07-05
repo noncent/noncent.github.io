@@ -10,7 +10,7 @@
         "Headless CMS enabling marketing autonomy without engineering bottlenecks"
       ],
       "tech": ["AWS", "Microservices", "Headless CMS", "Drupal", "Redis", "CDN"],
-      "thumbnail": "assets/covers/default.png",
+      "thumbnail": "assets/covers/default.jpg",
       "caseStudyUrl": "#featured"
     },
     {
@@ -23,7 +23,7 @@
         "Deployed on GitHub Pages with zero backend dependency"
       ],
       "tech": ["JavaScript", "LLM", "SPA", "GitHub Pages"],
-      "thumbnail": "assets/covers/ai-tools.png",
+      "thumbnail": "assets/covers/ai-tools.jpg",
       "caseStudyUrl": "https://noncent.github.io/promptvault/"
     },
     {
@@ -36,7 +36,7 @@
         "Standardised CI/CD pipelines across all service teams"
       ],
       "tech": ["Kubernetes", "Docker", "REST", "GraphQL", "Azure", "Terraform"],
-      "thumbnail": "assets/covers/devtools.png",
+      "thumbnail": "assets/covers/devtools.jpg",
       "caseStudyUrl": "#featured"
     },
     {
@@ -50,7 +50,7 @@
       ],
       "tech": ["Drupal", "Next.js", "GraphQL", "Vercel", "CloudFront"],
       "caseStudyUrl": "#featured",
-      "thumbnail": "assets/covers/php.png"
+      "thumbnail": "assets/covers/php.jpg"
     },
     {
       "id": "discope",
@@ -62,7 +62,7 @@
         "Open-sourced for developer community adoption"
       ],
       "tech": ["Rust", "Tauri", "Systems Programming"],
-      "thumbnail": "assets/covers/rust.png",
+      "thumbnail": "assets/covers/rust.jpg",
       "caseStudyUrl": "https://github.com/noncent/discope"
     },
     {
@@ -75,7 +75,7 @@
         "Voice + web channel parity with unified NLU pipeline"
       ],
       "tech": ["Dialogflow", "Node.js", "PHP", "Alexa", "Web Speech API"],
-      "thumbnail": "assets/covers/ai-tools.png",
+      "thumbnail": "assets/covers/ai-tools.jpg",
       "caseStudyUrl": "https://github.com/noncent/chatbot"
     }
   ]

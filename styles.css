@@ -212,7 +212,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* ---- Featured projects ---- */
 .project-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
 }
 .project-card {
   border-radius: 16px; overflow: hidden;
@@ -233,9 +233,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   transition: transform .5s var(--ease);
 }
 .project-card:hover .project-thumb img { transform: scale(1.03); }
-.project-body { padding: 24px 28px 28px; }
+.project-body { padding: 20px 22px 24px; }
 .project-name {
-  font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+  font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
   margin: 0 0 8px;
 }
 .project-desc { font-size: 15px; color: var(--text-muted); margin: 0 0 16px; line-height: 1.6; }
@@ -299,12 +299,14 @@ ul { margin: 0; padding: 0; list-style: none; }
 .lang-bar-pct { width: 36px; font-size: 12px; color: var(--text-muted); text-align: right; }
 
 /* ---- Repos ---- */
-.repos-toolbar { margin-bottom: 24px; }
+.repos-toolbar { margin-bottom: 24px; display: flex; flex-direction: column; gap: 16px; }
 .search-wrap {
   display: flex; align-items: center; gap: 12px;
-  padding: 12px 18px; border-radius: 12px;
-  border: 1px solid var(--border); background: var(--bg);
-  margin-bottom: 16px; max-width: 480px;
+  width: 100%; max-width: none;
+  padding: 14px 20px; border-radius: 14px;
+  border: 1px solid var(--border); background: var(--bg-subtle);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 0;
 }
 .search-icon { width: 18px; height: 18px; color: var(--text-muted); flex-shrink: 0; }
 #repo-search {
@@ -324,23 +326,29 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .repo-count { font-size: 13px; font-weight: 500; color: var(--text-muted); margin: 0 0 20px; }
 .repo-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
 }
 .repo-card {
-  border-radius: 14px; overflow: hidden;
+  border-radius: 16px; overflow: hidden;
   border: 1px solid var(--border); background: var(--bg);
   box-shadow: var(--shadow-soft); text-decoration: none; color: inherit;
   display: block; transition: transform .3s var(--ease), box-shadow .3s, border-color .3s;
+  position: relative;
+}
+.repo-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent); opacity: 0; transition: opacity .3s;
 }
 .repo-card:hover {
-  transform: translateY(-3px); box-shadow: var(--shadow-card);
+  transform: translateY(-4px); box-shadow: var(--shadow-card);
   border-color: var(--border-strong);
 }
-.repo-thumb { height: 120px; overflow: hidden; background: var(--bg-subtle); }
+.repo-card:hover::before { opacity: 1; }
+.repo-thumb { height: 140px; overflow: hidden; background: var(--bg-subtle); }
 .repo-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.repo-body { padding: 18px 20px 20px; }
+.repo-body { padding: 20px 22px 22px; }
 .repo-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
-.repo-name { font-size: 15px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+.repo-name { font-size: 16px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
 .repo-ext { width: 14px; height: 14px; opacity: .35; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 2; }
 .repo-meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
 .repo-pill {
@@ -528,12 +536,17 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero-actions { justify-content: center; }
   .hero-photo { order: -1; max-width: 320px; margin: 0 auto; }
   .stat-row { grid-template-columns: repeat(2, 1fr); }
-  .project-grid { grid-template-columns: 1fr; }
+  .project-grid { grid-template-columns: repeat(2, 1fr); }
+  .repo-grid { grid-template-columns: repeat(2, 1fr); }
   .impact-grid { grid-template-columns: repeat(2, 1fr); }
   .expertise-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonial-grid { grid-template-columns: 1fr; }
   .thought-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .project-grid { grid-template-columns: 1fr; }
+  .repo-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
   .nav { display: none; }

@@ -138,15 +138,15 @@ export const IMAGE_POOLS = {
 };
 
 export const FALLBACK_COVERS = {
-  ai: "assets/covers/ai-tools.png",
-  devtools: "assets/covers/devtools.png",
-  php: "assets/covers/php.png",
-  javascript: "assets/covers/javascript.png",
-  security: "assets/covers/security.png",
-  mobile: "assets/covers/mobile.png",
-  rust: "assets/covers/rust.png",
-  social: "assets/covers/social.png",
-  default: "assets/covers/default.png",
+  ai: "assets/covers/ai-tools.jpg",
+  devtools: "assets/covers/devtools.jpg",
+  php: "assets/covers/php.jpg",
+  javascript: "assets/covers/javascript.jpg",
+  security: "assets/covers/security.jpg",
+  mobile: "assets/covers/mobile.jpg",
+  rust: "assets/covers/rust.jpg",
+  social: "assets/covers/social.jpg",
+  default: "assets/covers/default.jpg",
 };
 
 export function hashString(str) {

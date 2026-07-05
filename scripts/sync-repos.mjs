@@ -42,7 +42,7 @@ function categorize(name, desc, lang) {
 
 function coverPath(category) {
   const file = COVER_FILES[category] || "default";
-  return `assets/covers/${file}.png`;
+  return `assets/covers/${file}.jpg`;
 }
 
 function runGh() {
@@ -66,7 +66,7 @@ const repos = rows.map((r) => {
     stars: r.stargazerCount || 0,
     forks: r.forkCount || 0,
     cover,
-    fallback: "assets/covers/default.png",
+    fallback: "assets/covers/default.jpg",
     url: r.url,
     updatedAt: r.updatedAt,
   };

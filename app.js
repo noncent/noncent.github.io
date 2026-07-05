@@ -7,8 +7,8 @@
   let profile, projects, expertise, timeline, testimonials, thoughts, gallery, github, repos;
   let activeFilter = "All";
   let countersDone = false;
-  const DEFAULT_IMG = "assets/covers/default.png";
-  const PHOTO_FALLBACKS = ["git-profile.png", "dist/img/profile.jpg"];
+  const DEFAULT_IMG = "assets/covers/default.jpg";
+  const PHOTO_FALLBACKS = ["git-profile.jpg", "git-profile.png", "dist/img/profile.jpg"];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function esc(s) {

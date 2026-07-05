@@ -10,7 +10,7 @@
         "Headless CMS enabling marketing autonomy without engineering bottlenecks"
       ],
       "tech": ["AWS", "Microservices", "Headless CMS", "Drupal", "Redis", "CDN"],
-      "thumbnail": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=500&fit=crop&q=80",
+      "thumbnail": "assets/covers/default.png",
       "caseStudyUrl": "#featured"
     },
     {
@@ -23,7 +23,7 @@
         "Deployed on GitHub Pages with zero backend dependency"
       ],
       "tech": ["JavaScript", "LLM", "SPA", "GitHub Pages"],
-      "thumbnail": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop&q=80",
+      "thumbnail": "assets/covers/ai-tools.png",
       "caseStudyUrl": "https://noncent.github.io/promptvault/"
     },
     {
@@ -36,7 +36,7 @@
         "Standardised CI/CD pipelines across all service teams"
       ],
       "tech": ["Kubernetes", "Docker", "REST", "GraphQL", "Azure", "Terraform"],
-      "thumbnail": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&fit=crop&q=80",
+      "thumbnail": "assets/covers/devtools.png",
       "caseStudyUrl": "#featured"
     },
     {
@@ -50,7 +50,7 @@
       ],
       "tech": ["Drupal", "Next.js", "GraphQL", "Vercel", "CloudFront"],
       "caseStudyUrl": "#featured",
-      "thumbnail": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&q=80"
+      "thumbnail": "assets/covers/php.png"
     },
     {
       "id": "discope",
@@ -62,7 +62,7 @@
         "Open-sourced for developer community adoption"
       ],
       "tech": ["Rust", "Tauri", "Systems Programming"],
-      "thumbnail": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop&q=80",
+      "thumbnail": "assets/covers/rust.png",
       "caseStudyUrl": "https://github.com/noncent/discope"
     },
     {
@@ -75,7 +75,7 @@
         "Voice + web channel parity with unified NLU pipeline"
       ],
       "tech": ["Dialogflow", "Node.js", "PHP", "Alexa", "Web Speech API"],
-      "thumbnail": "https://images.unsplash.com/photo-1535378917042-10a22c959f86?w=800&h=500&fit=crop&q=80",
+      "thumbnail": "assets/covers/ai-tools.png",
       "caseStudyUrl": "https://github.com/noncent/chatbot"
     }
   ]

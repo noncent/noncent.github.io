@@ -7,7 +7,6 @@ import { execSync } from "node:child_process";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { pickImages } from "./image-pools.mjs";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const root = join(__dir, "..");
@@ -15,8 +14,8 @@ const outPath = join(root, "data", "repos.json");
 
 const FILTER_CATEGORIES = ["AI", "Cloud", "Architecture", "Automation", "Platforms", "Web Engineering"];
 
-const POOL_MAP = {
-  AI: "ai",
+const COVER_FILES = {
+  AI: "ai-tools",
   Cloud: "default",
   Architecture: "devtools",
   Automation: "devtools",
@@ -41,6 +40,11 @@ function categorize(name, desc, lang) {
   return "Web Engineering";
 }
 
+function coverPath(category) {
+  const file = COVER_FILES[category] || "default";
+  return `assets/covers/${file}.png`;
+}
+
 function runGh() {
   const raw = execSync(
     "gh repo list noncent --limit 200 --json name,visibility,description,primaryLanguage,updatedAt,url,isPrivate,stargazerCount,forkCount",
@@ -53,7 +57,7 @@ const rows = runGh().filter((r) => !r.isPrivate);
 const repos = rows.map((r) => {
   const lang = r.primaryLanguage?.name || null;
   const category = categorize(r.name, r.description, lang);
-  const images = pickImages(POOL_MAP[category] || "default", r.name);
+  const cover = coverPath(category);
   return {
     name: r.name,
     description: r.description || "",
@@ -61,8 +65,8 @@ const repos = rows.map((r) => {
     category,
     stars: r.stargazerCount || 0,
     forks: r.forkCount || 0,
-    cover: images.cover,
-    fallback: images.fallback,
+    cover,
+    fallback: "assets/covers/default.png",
     url: r.url,
     updatedAt: r.updatedAt,
   };

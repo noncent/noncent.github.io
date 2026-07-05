@@ -7,6 +7,8 @@
   let profile, projects, expertise, timeline, testimonials, thoughts, gallery, github, repos;
   let activeFilter = "All";
   let countersDone = false;
+  const DEFAULT_IMG = "assets/covers/default.png";
+  const PHOTO_FALLBACKS = ["git-profile.png", "dist/img/profile.jpg"];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function esc(s) {
@@ -51,10 +53,13 @@
 
     const photo = $("hero-photo");
     if (photo) {
-      photo.addEventListener("error", () => {
-        photo.style.display = "none";
-        photo.parentElement.style.background = "linear-gradient(135deg,#1a1a1a,#2a2a2a)";
-      }, { once: true });
+      const chain = [profile.photo || PHOTO_FALLBACKS[0], ...PHOTO_FALLBACKS.filter((p) => p !== profile.photo)];
+      let idx = 0;
+      photo.src = chain[0];
+      photo.onerror = () => {
+        idx += 1;
+        if (idx < chain.length) photo.src = chain[idx];
+      };
     }
   }
 
@@ -90,7 +95,7 @@
         (p, i) => `
       <article class="project-card" style="--i:${i}">
         <div class="project-thumb">
-          <img src="${esc(p.thumbnail)}" alt="" loading="lazy" />
+          <img src="${esc(p.thumbnail)}" alt="" loading="lazy" data-fallback="${DEFAULT_IMG}" />
         </div>
         <div class="project-body">
           <h3 class="project-name">${esc(p.name)}</h3>
@@ -102,6 +107,7 @@
       </article>`
       )
       .join("");
+    initImageFallbacks(grid);
   }
 
   /* ---- Render: Engineering Impact ---- */
@@ -213,7 +219,7 @@
           (r, i) => `
         <a class="repo-card" role="listitem" href="${esc(r.repo.url)}" target="_blank" rel="noopener" style="--i:${i}">
           <div class="repo-thumb">
-            <img src="${esc(r.repo.cover)}" alt="" loading="lazy" data-fallback="${esc(r.repo.fallback || "")}" />
+            <img src="${esc(r.repo.cover)}" alt="" loading="lazy" data-fallback="${esc(r.repo.fallback || DEFAULT_IMG)}" />
           </div>
           <div class="repo-body">
             <div class="repo-head">
@@ -290,7 +296,7 @@
       <button class="gallery-item" type="button" style="--i:${i}"
         data-src="${esc(g.image)}" data-caption="${esc(g.caption)}" data-title="${esc(g.title)}">
         <div class="gallery-thumb">
-          <img src="${esc(g.image)}" alt="${esc(g.title)}" loading="lazy" />
+          <img src="${esc(g.image)}" alt="${esc(g.title)}" loading="lazy" data-fallback="${DEFAULT_IMG}" />
         </div>
         <div class="gallery-info">
           <p class="gallery-cat">${esc(g.category)}</p>
@@ -303,6 +309,7 @@
     grid.querySelectorAll(".gallery-item").forEach((btn) => {
       btn.addEventListener("click", () => openModal(btn.dataset.src, btn.dataset.caption || btn.dataset.title));
     });
+    initImageFallbacks(grid);
   }
 
   function openModal(src, caption) {
@@ -375,10 +382,17 @@
   /* ---- Utilities ---- */
   function initImageFallbacks(root) {
     if (!root) return;
-    root.querySelectorAll("img[data-fallback]").forEach((img) => {
-      img.addEventListener("error", function () {
-        if (this.dataset.fallback && this.src !== this.dataset.fallback) this.src = this.dataset.fallback;
-      }, { once: true });
+    root.querySelectorAll("img").forEach((img) => {
+      const fb = img.dataset.fallback || DEFAULT_IMG;
+      if (!img.dataset.fallback) img.dataset.fallback = fb;
+      img.addEventListener("error", function onErr() {
+        if (this.dataset.fellBack === "1") return;
+        const target = this.dataset.fallback || DEFAULT_IMG;
+        if (!this.src.includes(target)) {
+          this.dataset.fellBack = "1";
+          this.src = target;
+        }
+      });
     });
   }
 

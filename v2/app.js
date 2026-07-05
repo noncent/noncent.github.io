@@ -28,8 +28,8 @@
     soAnswers: "stackoverflow",
   };
 
-  const PHOTO_FALLBACKS = ["git-profile.jpg", "git-profile.png", "dist/img/profile.jpg"];
-  const DEFAULT_IMG = "assets/covers/default.jpg";
+  const PHOTO_FALLBACKS = ["../git-profile.jpg", "../git-profile.png", "../dist/img/profile.jpg"];
+  const DEFAULT_IMG = "../assets/covers/default.jpg";
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let profile, projects, expertise, testimonials, github, stackoverflow, repos, timeline, thoughts;
@@ -94,7 +94,7 @@
       about.dataset.fallback = chain;
     }
     const avatar = $("testimonial-avatar");
-    if (avatar) avatar.dataset.fallback = "assets/avatars/client-1.jpg";
+    if (avatar) avatar.dataset.fallback = "../assets/avatars/client-1.jpg";
     initImageFallbacks();
   }
 
@@ -109,7 +109,7 @@
   }
 
   function clientAvatarUrl(item) {
-    return item?.avatar ? `${item.avatar}` : "assets/avatars/client-1.jpg";
+    return item?.avatar ? `../${item.avatar}` : "../assets/avatars/client-1.jpg";
   }
 
   function impactIconHtml(key) {
@@ -234,7 +234,7 @@
     const grid = $("portfolio-grid");
     if (!grid || !projects?.items) return;
     grid.innerHTML = projects.items.map((p, i) => {
-      const thumb = p.thumbnail ? `${p.thumbnail}` : DEFAULT_IMG;
+      const thumb = p.thumbnail ? `../${p.thumbnail}` : DEFAULT_IMG;
       const primaryTag = (p.tech && p.tech[0]) || "Project";
       const hidden =
         activePortfolioFilter !== "All" && !(p.tech || []).includes(activePortfolioFilter);
@@ -364,8 +364,8 @@
     const grid = $("repo-grid");
     if (grid) {
       grid.innerHTML = results.map((r, i) => {
-        const cover = r.repo.cover ? `${r.repo.cover.replace(/^\.\.\//, "")}` : DEFAULT_IMG;
-        const fallback = r.repo.fallback ? `${r.repo.fallback.replace(/^\.\.\//, "")}` : DEFAULT_IMG;
+        const cover = r.repo.cover ? `../${r.repo.cover.replace(/^\.\.\//, "")}` : DEFAULT_IMG;
+        const fallback = r.repo.fallback ? `../${r.repo.fallback.replace(/^\.\.\//, "")}` : DEFAULT_IMG;
         const tagParts = [r.repo.language, r.repo.category].filter(Boolean);
         if (r.repo.stars > 0) tagParts.push(`${r.repo.stars} ★`);
         const tag = tagParts.join(" · ");
@@ -595,15 +595,15 @@
         timeline,
         thoughts,
       ] = await Promise.all([
-        fetch("data/profile.json").then((r) => r.json()),
-        fetch("data/projects.json").then((r) => r.json()),
-        fetch("data/expertise.json").then((r) => r.json()),
-        fetch("data/testimonials.json?v=photos1").then((r) => r.json()),
-        fetch("data/github.json").then((r) => r.json()),
-        fetch("data/stackoverflow.json").then((r) => r.json()),
-        fetch("data/repos.json").then((r) => r.json()),
-        fetch("data/timeline.json").then((r) => r.json()),
-        fetch("data/thought-leadership.json").then((r) => r.json()),
+        fetch("../data/profile.json").then((r) => r.json()),
+        fetch("../data/projects.json").then((r) => r.json()),
+        fetch("../data/expertise.json").then((r) => r.json()),
+        fetch("../data/testimonials.json?v=photos1").then((r) => r.json()),
+        fetch("../data/github.json").then((r) => r.json()),
+        fetch("../data/stackoverflow.json").then((r) => r.json()),
+        fetch("../data/repos.json").then((r) => r.json()),
+        fetch("../data/timeline.json").then((r) => r.json()),
+        fetch("../data/thought-leadership.json").then((r) => r.json()),
       ]);
     } catch (e) {
       console.error("V2 boot failed:", e);

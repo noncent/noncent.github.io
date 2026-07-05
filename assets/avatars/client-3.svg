@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" role="img" aria-label="Client avatar">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E7"/>
+      <stop offset="100%" stop-color="#E6FFFA"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="240" fill="url(#bg3)"/>
+  <ellipse cx="100" cy="200" rx="70" ry="55" fill="#0D9488" opacity="0.12"/>
+  <ellipse cx="100" cy="105" rx="52" ry="58" fill="#6B4423"/>
+  <path d="M52 92c4-18 26-36 48-36s44 18 48 36c-14-12-30-18-48-18s-34 6-48 18z" fill="#4A3728"/>
+  <ellipse cx="100" cy="108" rx="46" ry="50" fill="#F1C27D"/>
+  <ellipse cx="82" cy="102" rx="6" ry="7" fill="#2D3436"/>
+  <ellipse cx="118" cy="102" rx="6" ry="7" fill="#2D3436"/>
+  <path d="M88 124q12 10 24 0" stroke="#D4956A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M55 175c10-20 30-30 45-30s35 10 45 30" fill="#42B883"/>
+  <circle cx="150" cy="70" r="12" fill="#FDCB6E" opacity="0.6"/>
+  <circle cx="40" cy="80" r="8" fill="#6C5CE7" opacity="0.25"/>
+</svg>

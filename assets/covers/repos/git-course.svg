@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="git-course">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F48024"/>
+      <stop offset="100%" stop-color="#FFF3E8"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#bg)"/>
+  <circle cx="560" cy="60" r="48" fill="#F48024" opacity="0.15"/>
+  <circle cx="80" cy="340" r="64" fill="#F48024" opacity="0.12"/>
+  <line x1="0" y1="320" x2="640" y2="280" stroke="#F48024" stroke-width="1" opacity="0.2"/>
+  <g transform="translate(48, 48) scale(4.5)" fill="#FFFFFF" opacity="0.92">
+    <path fill="currentColor" d="M12 2l-2 2 1.4 1.4L12 4.8l.6.6L13.4 4 12 2zM6 8l-2 2 6 6 2-2-6-6zm12 0l-6 6 2 2 6-6-2-2zM12 14l-2 2 2 2 2-2-2-2z"/>
+  </g>
+  <text x="48" y="340" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.75)" letter-spacing="0.08em">EDUCATION</text>
+  <text x="48" y="372" font-family="system-ui,sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">git-course</text>
+  <circle cx="600" cy="360" r="4" fill="#F48024" opacity="0.4"/>
+  <circle cx="580" cy="380" r="3" fill="#F48024" opacity="0.3"/>
+  <circle cx="620" cy="370" r="2" fill="#F48024" opacity="0.35"/>
+</svg>

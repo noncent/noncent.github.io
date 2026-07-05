@@ -13,7 +13,7 @@
   --container: 1140px;
   --header-container: 1400px;
   --header-h: 72px;
-  --banner-h: 0px;
+  --banner-h: 36px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 

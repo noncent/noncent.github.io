@@ -25,7 +25,7 @@
       "category": "Automation",
       "stars": 610,
       "forks": 134,
-      "cover": "assets/covers/devtools.jpg",
+      "cover": "assets/covers/repos/instagram-data-scraper.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/instagram-data-scraper",
       "updatedAt": "2026-07-04T18:58:11Z"
@@ -37,7 +37,7 @@
       "category": "Platforms",
       "stars": 25,
       "forks": 19,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/pdo_class_wrapper.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/pdo_class_wrapper",
       "updatedAt": "2022-11-14T18:09:28Z"
@@ -49,7 +49,7 @@
       "category": "Web Engineering",
       "stars": 14,
       "forks": 3,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/htaccess-best-web-security-practices.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/htaccess-best-web-security-practices",
       "updatedAt": "2026-06-22T07:38:51Z"
@@ -61,7 +61,7 @@
       "category": "Platforms",
       "stars": 11,
       "forks": 8,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/mysql-find-replace-php.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/mysql-find-replace-php",
       "updatedAt": "2025-11-09T05:48:24Z"
@@ -73,7 +73,7 @@
       "category": "Web Engineering",
       "stars": 6,
       "forks": 2,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/Image-Video-Slider-For-iOS-Android.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/Image-Video-Slider-For-iOS-Android",
       "updatedAt": "2017-04-03T19:30:54Z"
@@ -85,7 +85,7 @@
       "category": "Automation",
       "stars": 2,
       "forks": 1,
-      "cover": "assets/covers/devtools.jpg",
+      "cover": "assets/covers/repos/jQuery.escapeHtml.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/jQuery.escapeHtml",
       "updatedAt": "2022-05-18T19:56:24Z"
@@ -97,7 +97,7 @@
       "category": "Web Engineering",
       "stars": 2,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/kcfinder_ckeditor_absolute_url.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/kcfinder_ckeditor_absolute_url",
       "updatedAt": "2020-08-16T14:45:05Z"
@@ -109,7 +109,7 @@
       "category": "Web Engineering",
       "stars": 2,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/simple-error-templates.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/simple-error-templates",
       "updatedAt": "2020-08-16T14:43:01Z"
@@ -121,7 +121,7 @@
       "category": "Web Engineering",
       "stars": 1,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/noncent.github.io.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/noncent.github.io",
       "updatedAt": "2026-07-05T08:37:00Z"
@@ -133,7 +133,7 @@
       "category": "AI",
       "stars": 1,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/developers-cheat-sheet.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/developers-cheat-sheet",
       "updatedAt": "2026-03-03T12:02:29Z"
@@ -145,7 +145,7 @@
       "category": "Web Engineering",
       "stars": 1,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/bruos.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/bruos",
       "updatedAt": "2026-03-02T14:32:59Z"
@@ -157,7 +157,7 @@
       "category": "Automation",
       "stars": 1,
       "forks": 0,
-      "cover": "assets/covers/devtools.jpg",
+      "cover": "assets/covers/repos/windows-host-entry-manager.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/windows-host-entry-manager",
       "updatedAt": "2025-11-21T02:35:53Z"
@@ -169,7 +169,7 @@
       "category": "Web Engineering",
       "stars": 1,
       "forks": 1,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/twitter-hashtag-gallery.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/twitter-hashtag-gallery",
       "updatedAt": "2024-04-13T20:55:26Z"
@@ -181,7 +181,7 @@
       "category": "Web Engineering",
       "stars": 1,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/twitter-auto-tweets.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/twitter-auto-tweets",
       "updatedAt": "2024-04-13T20:23:53Z"
@@ -193,7 +193,7 @@
       "category": "Automation",
       "stars": 1,
       "forks": 1,
-      "cover": "assets/covers/devtools.jpg",
+      "cover": "assets/covers/repos/wamp-create-virtualhost.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/wamp-create-virtualhost",
       "updatedAt": "2020-08-16T14:44:40Z"
@@ -205,7 +205,7 @@
       "category": "Automation",
       "stars": 1,
       "forks": 0,
-      "cover": "assets/covers/devtools.jpg",
+      "cover": "assets/covers/repos/windows-host-manager.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/windows-host-manager",
       "updatedAt": "2020-08-16T14:44:18Z"
@@ -217,7 +217,7 @@
       "category": "Web Engineering",
       "stars": 1,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/codeigniter-log-viewer.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/codeigniter-log-viewer",
       "updatedAt": "2018-06-20T16:46:13Z"
@@ -229,7 +229,7 @@
       "category": "Web Engineering",
       "stars": 1,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/jConfig.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/jConfig",
       "updatedAt": "2014-05-28T09:38:03Z"
@@ -241,7 +241,7 @@
       "category": "Web Engineering",
       "stars": 1,
       "forks": 1,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/PHP-JSON-With-Ajax.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/PHP-JSON-With-Ajax",
       "updatedAt": "2014-05-23T14:28:21Z"
@@ -253,7 +253,7 @@
       "category": "AI",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/promptvault.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/promptvault",
       "updatedAt": "2026-07-04T16:00:07Z"
@@ -265,7 +265,7 @@
       "category": "Web Engineering",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/nono.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/nono",
       "updatedAt": "2025-08-19T07:50:54Z"
@@ -277,7 +277,7 @@
       "category": "AI",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/discope.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/discope",
       "updatedAt": "2025-08-14T21:42:24Z"
@@ -289,7 +289,7 @@
       "category": "Web Engineering",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/crypto.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/crypto",
       "updatedAt": "2024-09-30T11:07:30Z"
@@ -301,7 +301,7 @@
       "category": "AI",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/bot-browser.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/bot-browser",
       "updatedAt": "2024-04-13T20:23:36Z"
@@ -313,7 +313,7 @@
       "category": "Web Engineering",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/poc.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/poc",
       "updatedAt": "2024-03-17T06:07:05Z"
@@ -325,7 +325,7 @@
       "category": "Web Engineering",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/ssr-demo.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/ssr-demo",
       "updatedAt": "2023-06-06T15:14:11Z"
@@ -337,7 +337,7 @@
       "category": "Web Engineering",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/noncent.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/noncent",
       "updatedAt": "2023-06-04T11:18:54Z"
@@ -349,7 +349,7 @@
       "category": "AI",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/Alexa-PHP-Endpoint.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/Alexa-PHP-Endpoint",
       "updatedAt": "2023-01-16T08:19:49Z"
@@ -361,7 +361,7 @@
       "category": "Automation",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/devtools.jpg",
+      "cover": "assets/covers/repos/wampserver-ssl-auto-config.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/wampserver-ssl-auto-config",
       "updatedAt": "2022-07-31T20:24:53Z"
@@ -373,7 +373,7 @@
       "category": "Web Engineering",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/git-course.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/git-course",
       "updatedAt": "2021-05-28T14:08:19Z"
@@ -385,7 +385,7 @@
       "category": "AI",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/instagram-follower-bot.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/instagram-follower-bot",
       "updatedAt": "2021-05-17T06:14:44Z"
@@ -397,7 +397,7 @@
       "category": "Web Engineering",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/phpjs.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/phpjs",
       "updatedAt": "2020-09-18T14:06:41Z"
@@ -409,7 +409,7 @@
       "category": "Platforms",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/laravel-surveyjs.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/laravel-surveyjs",
       "updatedAt": "2020-09-12T19:35:52Z"
@@ -421,7 +421,7 @@
       "category": "Web Engineering",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/google-api-php-client.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/google-api-php-client",
       "updatedAt": "2020-06-18T15:52:28Z"
@@ -433,7 +433,7 @@
       "category": "Platforms",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/mysql-tricks.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/mysql-tricks",
       "updatedAt": "2020-04-19T10:52:11Z"
@@ -445,7 +445,7 @@
       "category": "AI",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/chatbot.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/chatbot",
       "updatedAt": "2020-02-21T17:17:19Z"
@@ -457,7 +457,7 @@
       "category": "Platforms",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/lumendingojwtapi.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/lumendingojwtapi",
       "updatedAt": "2019-11-21T11:09:58Z"
@@ -469,7 +469,7 @@
       "category": "Platforms",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/lumen-jwt.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/lumen-jwt",
       "updatedAt": "2019-11-21T11:09:56Z"
@@ -481,7 +481,7 @@
       "category": "Platforms",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/rest-api-with-lumen.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/rest-api-with-lumen",
       "updatedAt": "2019-11-21T11:09:53Z"
@@ -493,7 +493,7 @@
       "category": "Platforms",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/lumen-api-demo.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/lumen-api-demo",
       "updatedAt": "2019-11-21T11:09:47Z"
@@ -505,7 +505,7 @@
       "category": "AI",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/web-speech-ai.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/web-speech-ai",
       "updatedAt": "2019-11-20T10:41:10Z"
@@ -517,7 +517,7 @@
       "category": "AI",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/agent-human-handoff-nodejs.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/agent-human-handoff-nodejs",
       "updatedAt": "2019-01-28T16:41:49Z"
@@ -529,7 +529,7 @@
       "category": "AI",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/ai-tools.jpg",
+      "cover": "assets/covers/repos/google-cloud-php-dialogflow.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/google-cloud-php-dialogflow",
       "updatedAt": "2018-09-20T20:25:25Z"
@@ -541,7 +541,7 @@
       "category": "Platforms",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/laravel-admin.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/laravel-admin",
       "updatedAt": "2018-01-24T15:07:12Z"
@@ -553,7 +553,7 @@
       "category": "Platforms",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/php.jpg",
+      "cover": "assets/covers/repos/mysql-workbench-export-laravel-5-migrations.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/mysql-workbench-export-laravel-5-migrations",
       "updatedAt": "2017-03-31T12:56:01Z"
@@ -565,7 +565,7 @@
       "category": "Web Engineering",
       "stars": 0,
       "forks": 0,
-      "cover": "assets/covers/javascript.jpg",
+      "cover": "assets/covers/repos/captcha.class.php.svg",
       "fallback": "assets/covers/default.jpg",
       "url": "https://github.com/noncent/captcha.class.php",
       "updatedAt": "2014-03-06T14:53:49Z"

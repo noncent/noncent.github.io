@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neeraj Singh — Solution Architect &amp; Engineering Leader</title>
+  <meta name="description" content="Senior Solution Architect with 15+ years designing enterprise platforms, cloud-native architectures, AI solutions and digital transformation programmes." />
+  <meta property="og:title" content="Neeraj Singh — Solution Architect" />
+  <meta property="og:description" content="Building digital platforms. Solving complex problems. Leading engineering excellence." />
+  <meta property="og:url" content="https://noncent.github.io/v1-backup/" />
+  <base href="https://noncent.github.io/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="v1-backup/styles.css?v=12" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#hero">Neeraj Singh</a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="#featured" data-section="featured">Work</a>
+        <a class="nav-link" href="#engineering" data-section="engineering">Engineering</a>
+        <a class="nav-link" href="#expertise" data-section="expertise">Expertise</a>
+        <a class="nav-link" href="#experience" data-section="experience">Experience</a>
+        <a class="nav-link" href="#contact" data-section="contact">Contact</a>
+        <a class="nav-link nav-ext" href="https://github.com/noncent" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="hero-grid-lines" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <h1 class="hero-headline" id="hero-headline"></h1>
+          <p class="hero-sub" id="hero-sub"></p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#featured">View My Work</a>
+            <a class="btn btn-secondary" href="#contact">Let's Connect</a>
+          </div>
+        </div>
+        <div class="hero-photo reveal" style="--i:1">
+          <div class="photo-frame">
+            <img id="hero-photo" src="git-profile.jpg" alt="Neeraj Singh" width="480" height="560" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section section-about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-editorial reveal">
+            <span class="eyebrow">About</span>
+            <blockquote class="about-quote" id="about-intro"></blockquote>
+            <ul class="about-pillars" id="about-pillars"></ul>
+          </div>
+          <div class="stat-row reveal-stagger" id="about-stats"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED WORK -->
+    <section id="featured" class="section">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="eyebrow">Featured Work</span>
+          <h2 class="section-title">Selected architecture &amp; platform programmes</h2>
+        </header>
+        <div class="project-grid reveal-stagger" id="featured-grid"></div>
+      </div>
+    </section>
+
+    <!-- ENGINEERING IMPACT -->
+    <section id="engineering" class="section section-engineering">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="eyebrow">Engineering Impact</span>
+          <h2 class="section-title" id="impact-headline">Engineering Through Code.</h2>
+          <p class="section-desc" id="impact-sub"></p>
+        </header>
+        <div class="impact-grid reveal-stagger" id="impact-grid"></div>
+        <div class="lang-breakdown reveal" id="lang-breakdown"></div>
+      </div>
+    </section>
+
+    <!-- GITHUB REPOS -->
+    <section id="repos" class="section">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="eyebrow">Open Source</span>
+          <h2 class="section-title">GitHub repositories</h2>
+          <p class="section-desc" id="repos-summary"></p>
+        </header>
+        <div class="repos-toolbar reveal">
+          <div class="search-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <input id="repo-search" type="search" placeholder="Search repositories…" autocomplete="off" spellcheck="false" aria-label="Search repositories" />
+          </div>
+          <div id="repo-filters" class="filter-chips" role="tablist" aria-label="Filter repositories"></div>
+        </div>
+        <p id="repo-count" class="repo-count" aria-live="polite"></p>
+        <div class="repo-grid reveal-stagger" id="repo-grid" role="list"></div>
+        <p id="repo-empty" class="empty-state hidden">No repositories match your search.</p>
+        <div class="section-cta reveal">
+          <a class="btn btn-primary" id="github-profile-cta" href="https://github.com/noncent" target="_blank" rel="noopener">View GitHub Profile</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERTISE -->
+    <section id="expertise" class="section section-subtle">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="eyebrow">Expertise</span>
+          <h2 class="section-title">Architecture &amp; engineering capabilities</h2>
+        </header>
+        <div class="expertise-grid reveal-stagger" id="expertise-grid"></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="eyebrow">Experience</span>
+          <h2 class="section-title">Career timeline</h2>
+        </header>
+        <div class="timeline reveal-stagger" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE GALLERY -->
+    <section id="gallery" class="section section-subtle">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="eyebrow">Architecture Gallery</span>
+          <h2 class="section-title">System thinking &amp; design artefacts</h2>
+        </header>
+        <div class="gallery-grid reveal-stagger" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section hidden-section">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="eyebrow">References</span>
+          <h2 class="section-title">What stakeholders say</h2>
+        </header>
+        <div class="testimonial-grid reveal-stagger" id="testimonial-grid"></div>
+      </div>
+    </section>
+
+    <!-- THOUGHT LEADERSHIP -->
+    <section id="thought-leadership" class="section section-subtle hidden-section">
+      <div class="container">
+        <header class="section-header reveal">
+          <span class="eyebrow">Thought Leadership</span>
+          <h2 class="section-title">Articles, talks &amp; ideas</h2>
+          <p class="section-desc"><a href="https://medium.com/@neerajsinghsonu" target="_blank" rel="noopener">View all on Medium</a></p>
+        </header>
+        <div class="thought-grid reveal-stagger" id="thought-grid"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section section-contact">
+      <div class="container contact-inner reveal">
+        <h2 class="contact-title">Let's Build Something Meaningful.</h2>
+        <p class="contact-desc">Open to architecture leadership, platform consulting, and engineering partnerships.</p>
+        <div class="contact-actions" id="contact-actions"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="footer-year"></span> Neeraj Singh</p>
+      <a href="https://github.com/noncent/noncent.github.io" target="_blank" rel="noopener">Source</a>
+    </div>
+  </footer>
+
+  <!-- Gallery modal -->
+  <div id="gallery-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Architecture diagram">
+    <button class="modal-close" type="button" aria-label="Close">&times;</button>
+    <div class="modal-content">
+      <img id="modal-img" src="" alt="" />
+      <p id="modal-caption" class="modal-caption"></p>
+    </div>
+  </div>
+
+  <script src="icons.js?v=12"></script>
+  <script src="v1-backup/app.js?v=12"></script>
+</body>
+</html>

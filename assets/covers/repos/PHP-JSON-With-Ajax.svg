@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="PHP-JSON-With-Ajax">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#777BB4"/>
+      <stop offset="100%" stop-color="#EEEEF8"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#bg)"/>
+  <circle cx="560" cy="60" r="48" fill="#777BB4" opacity="0.15"/>
+  <circle cx="80" cy="340" r="64" fill="#777BB4" opacity="0.12"/>
+  <line x1="0" y1="320" x2="640" y2="280" stroke="#777BB4" stroke-width="1" opacity="0.2"/>
+  <g transform="translate(48, 48) scale(4.5)" fill="#FFFFFF" opacity="0.92">
+    <path fill="currentColor" d="M6 6h2v12H6c-1.5 0-2-1-2-2V8c0-1 0.5-2 2-2zm12 0c1.5 0 2 1 2 2v8c0 1-0.5 2-2 2h-2V6h2zM9 8h6v2H9V8zm0 4h6v2H9v-2z"/>
+  </g>
+  <text x="48" y="340" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="rgba(255,255,255,0.75)" letter-spacing="0.08em">WEB</text>
+  <text x="48" y="372" font-family="system-ui,sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">PHP-JSON-With-Ajax</text>
+  <circle cx="600" cy="360" r="4" fill="#777BB4" opacity="0.4"/>
+  <circle cx="580" cy="380" r="3" fill="#777BB4" opacity="0.3"/>
+  <circle cx="620" cy="370" r="2" fill="#777BB4" opacity="0.35"/>
+</svg>

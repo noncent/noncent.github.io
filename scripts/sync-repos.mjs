@@ -4,7 +4,7 @@
  * Usage: node scripts/sync-repos.mjs
  */
 import { execSync } from "node:child_process";
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -45,6 +45,20 @@ function coverPath(category) {
   return `assets/covers/${file}.jpg`;
 }
 
+function perRepoSvgCover(name) {
+  const rel = `assets/covers/repos/${name}.svg`;
+  return existsSync(join(root, rel)) ? rel : null;
+}
+
+function loadExistingCovers() {
+  try {
+    const prev = JSON.parse(readFileSync(outPath, "utf8"));
+    return new Map((prev.repos || []).map((r) => [r.name, r.cover]));
+  } catch {
+    return new Map();
+  }
+}
+
 function runGh() {
   const raw = execSync(
     "gh repo list noncent --limit 200 --json name,visibility,description,primaryLanguage,updatedAt,url,isPrivate,stargazerCount,forkCount",
@@ -54,10 +68,14 @@ function runGh() {
 }
 
 const rows = runGh().filter((r) => !r.isPrivate);
+const existingCovers = loadExistingCovers();
 const repos = rows.map((r) => {
   const lang = r.primaryLanguage?.name || null;
   const category = categorize(r.name, r.description, lang);
-  const cover = coverPath(category);
+  const cover =
+    perRepoSvgCover(r.name) ||
+    (existingCovers.get(r.name)?.startsWith("assets/covers/repos/") ? existingCovers.get(r.name) : null) ||
+    coverPath(category);
   return {
     name: r.name,
     description: r.description || "",

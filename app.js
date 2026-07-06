@@ -32,7 +32,7 @@
   const DEFAULT_IMG = "assets/covers/default.jpg";
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  let profile, projects, expertise, testimonials, github, stackoverflow, repos, timeline, thoughts;
+  let profile, projects, expertise, testimonials, github, stackoverflow, repos, timeline, thoughts, certificates;
   let testimonialIndex = 0;
   let activePortfolioFilter = "All";
   let activeRepoFilter = "All";
@@ -440,6 +440,36 @@
     ).join("");
   }
 
+  function renderCertWall() {
+    const items = certificates?.items || [];
+    const summary = $("certs-summary");
+    if (summary) summary.textContent = certificates?.summary || "";
+    const row1 = $("cert-track-1");
+    const row2 = $("cert-track-2");
+    if (!row1 || !row2 || !items.length) return;
+
+    const tile = (c) => {
+      const href = c.url ? esc(c.url) : "#";
+      const size = c.size || "landscape";
+      return `<a class="cert-tile cert-tile--${size}" href="${href}" target="_blank" rel="noopener" title="${esc(c.title)}">
+        <img src="${esc(c.cover)}" alt="${esc(c.title)}" loading="lazy" width="320" height="280" />
+      </a>`;
+    };
+
+    const row1Items = items.filter((_, i) => i % 2 === 0);
+    const row2Items = items.filter((_, i) => i % 2 === 1);
+    const dup = (arr) => [...arr, ...arr];
+
+    row1.innerHTML = `<div class="cert-track-inner">${dup(row1Items).map(tile).join("")}</div>`;
+    row2.innerHTML = `<div class="cert-track-inner">${dup(row2Items).map(tile).join("")}</div>`;
+
+    const linkedin = profile?.contact?.linkedin;
+    const cta = $("certs-linkedin-cta");
+    if (cta && linkedin) {
+      cta.href = `${linkedin.replace(/\/$/, "")}/details/certifications/`;
+    }
+  }
+
   function renderTestimonial() {
     const items = testimonials?.items || [];
     if (!items.length) return;
@@ -594,6 +624,7 @@
         repos,
         timeline,
         thoughts,
+        certificates,
       ] = await Promise.all([
         fetch("data/profile.json").then((r) => r.json()),
         fetch("data/projects.json").then((r) => r.json()),
@@ -604,6 +635,7 @@
         fetch("data/repos.json").then((r) => r.json()),
         fetch("data/timeline.json").then((r) => r.json()),
         fetch("data/thought-leadership.json").then((r) => r.json()),
+        fetch("data/certificates.json").then((r) => r.json()),
       ]);
     } catch (e) {
       console.error("V2 boot failed:", e);
@@ -625,6 +657,7 @@
     renderRepos();
     renderExpertise();
     renderTimeline();
+    renderCertWall();
     renderThoughts();
     renderTestimonial();
     bindTestimonialNav();

@@ -986,6 +986,102 @@ ul { list-style: none; }
 }
 
 /* Testimonials */
+/* ---- Certifications wall ---- */
+.section-certs { overflow: hidden; }
+
+.cert-wall {
+  position: relative;
+  margin: 32px 0 8px;
+  padding: 8px 0 20px;
+  overflow: hidden;
+}
+
+.cert-wall-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(40px, 8vw, 100px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cert-wall-fade--left {
+  left: 0;
+  background: linear-gradient(90deg, var(--v2-white) 0%, transparent 100%);
+}
+
+.cert-wall-fade--right {
+  right: 0;
+  background: linear-gradient(270deg, var(--v2-white) 0%, transparent 100%);
+}
+
+.cert-track {
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.cert-track:last-child { margin-bottom: 0; }
+
+.cert-track-inner {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+}
+
+.cert-track--row1 .cert-track-inner {
+  animation: certScrollLeft 52s linear infinite;
+}
+
+.cert-track--row2 .cert-track-inner {
+  animation: certScrollRight 58s linear infinite;
+  padding-left: 80px;
+}
+
+.cert-wall:hover .cert-track-inner {
+  animation-play-state: paused;
+}
+
+@keyframes certScrollLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes certScrollRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.cert-tile {
+  flex-shrink: 0;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(108, 92, 231, 0.12);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.cert-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(108, 92, 231, 0.2);
+}
+
+.cert-tile img {
+  display: block;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
+.cert-tile--landscape { height: 200px; }
+.cert-tile--portrait { height: 268px; }
+.cert-tile--square { height: 228px; }
+
+.section-certs .section-cta {
+  margin-top: 24px;
+  text-align: center;
+}
+
 .section-testimonials { background: var(--v2-yellow); }
 .testimonials-inner {
   display: grid;
@@ -1217,6 +1313,9 @@ ul { list-style: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .cert-track-inner { animation: none !important; }
+  .cert-wall { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cert-track { overflow-x: visible; }
   html { scroll-behavior: auto; }
   .reveal, .reveal-stagger > * {
     opacity: 1;

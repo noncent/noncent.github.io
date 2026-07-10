@@ -440,6 +440,8 @@
     ).join("");
   }
 
+  const CERT_BADGE = "../assets/certs/certificate-badge.svg";
+
   function renderCertWall() {
     const items = certificates?.items || [];
     const summary = $("certs-summary");
@@ -448,16 +450,30 @@
     const row2 = $("cert-track-2");
     if (!row1 || !row2 || !items.length) return;
 
-    const coverSrc = (c) => {
-      const p = c.cover || "";
-      return p.startsWith("../") ? p : `../${p}`;
-    };
-
     const tile = (c) => {
       const href = c.url ? esc(c.url) : "#";
-      const size = c.size || "landscape";
-      return `<a class="cert-tile cert-tile--${size}" href="${href}" target="_blank" rel="noopener" title="${esc(c.title)}">
-        <img src="${esc(coverSrc(c))}" alt="${esc(c.title)}" loading="lazy" width="320" height="280" />
+      const via = c.platform === "coursera"
+        ? `<span class="cert-card-via">via Coursera</span>`
+        : "";
+      const skill = c.skill
+        ? `<span class="cert-card-skill">${esc(c.skill)}</span>`
+        : `<span class="cert-card-skill cert-card-skill--empty" aria-hidden="true"></span>`;
+      return `<a class="cert-tile" href="${href}" target="_blank" rel="noopener" title="${esc(c.title)}">
+        <article class="cert-card">
+          <header class="cert-card-head">
+            <img class="cert-card-badge" src="${CERT_BADGE}?v=certs8" alt="" width="40" height="40" loading="eager" />
+            <div class="cert-card-meta">
+              <span class="cert-card-eyebrow">Certificate</span>
+              <span class="cert-card-issuer">${esc(c.issuer)}</span>
+              ${via}
+            </div>
+          </header>
+          <h3 class="cert-card-title">${esc(c.title)}</h3>
+          <footer class="cert-card-foot">
+            ${skill}
+            ${c.issued ? `<time class="cert-card-date">${esc(c.issued)}</time>` : ""}
+          </footer>
+        </article>
       </a>`;
     };
 
@@ -640,7 +656,7 @@
         fetch("../data/repos.json").then((r) => r.json()),
         fetch("../data/timeline.json").then((r) => r.json()),
         fetch("../data/thought-leadership.json").then((r) => r.json()),
-        fetch("../data/certificates.json").then((r) => r.json()),
+        fetch("../data/certificates.json?v=certs8").then((r) => r.json()),
       ]);
     } catch (e) {
       console.error("V2 boot failed:", e);

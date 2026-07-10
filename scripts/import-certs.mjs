@@ -1,85 +1,19 @@
 #!/usr/bin/env node
 /**
- * Import certificates into data/certificates.json.
- *
- * Usage:
- *   node scripts/import-certs.mjs --seed
- *   node scripts/import-certs.mjs --export /path/to/Certifications.csv
+ * Import certificates from data/certs-source.json (or --file path).
+ * Usage: node scripts/import-certs.mjs --from-source
  */
 
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { topicForTitle } from "./cert-card-themes.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const OUT = path.join(ROOT, "data", "certificates.json");
+const SOURCE = path.join(ROOT, "data", "certs-source.json");
 
-const SIZES_CYCLE = ["landscape", "portrait", "square", "landscape", "square", "portrait"];
-
-const SEED = [
-  {
-    title: "Advanced WordPress: Action and Filter Hooks (2017)",
-    issuer: "LinkedIn Learning",
-    issued: "Sep 2020",
-    url: "https://linkedin.com/learning/certificates/5d221293c10134f1ae33eba6e4ffd416251ed5e80404a427c2ca08aec37c6ea2",
-  },
-  {
-    title: "Amazon Web Services: High Availability (2016)",
-    issuer: "LinkedIn Learning",
-    issued: "Sep 2020",
-    url: "https://linkedin.com/learning/certificates/83a24db586ecafb3961ebc39283a937bf8e449614be367214d8d40244768afe1",
-  },
-  {
-    title: "AWS Certified Solutions Architect - Associate (SAA-C01): 1 Cloud Services Overview (2019)",
-    issuer: "LinkedIn Learning",
-    issued: "Sep 2020",
-    url: "https://linkedin.com/learning/certificates/bf78d84a7395866eb8ad7374d2b90a783535b6bb71c6fbaaa28949f7512f2f5c",
-  },
-  {
-    title: "AWS Certified Solutions Architect - Associate (SAA-C01): 4 Compute Services",
-    issuer: "LinkedIn Learning",
-    issued: "Sep 2020",
-    url: "https://linkedin.com/learning/certificates/935939ecf679b314b062e4fc8377f30dfff8071072720756f195ce5a1f87b913",
-  },
-  {
-    title: "AWS Certified Solutions Architect - Associate (SAA-C01): 5 Identity and Access Management",
-    issuer: "LinkedIn Learning",
-    issued: "Sep 2020",
-    url: "https://linkedin.com/learning/certificates/4b1a37f5dc4950b09f568dcfcf9ce5f511b4bf1efa9a498f5c126b37bc02f562",
-  },
-  {
-    title: "Exam Tips: AWS Certified Solutions Architect - Associate (SAA-C01)",
-    issuer: "LinkedIn Learning",
-    issued: "Sep 2020",
-    url: "https://linkedin.com/learning/certificates/3c45208ada66b1f179f69f67ca5fb891d4c0ff9e00311c8313e3b6af8abbedb9",
-  },
-  {
-    title: "Ionic 4.0 : Deploying Ionic Apps",
-    issuer: "LinkedIn Learning",
-    issued: "Sep 2020",
-    url: "https://linkedin.com/learning/certificates/1ad83515ea44d9c0e60888b59a8bdc691a40f2422b78768e3575e96a6b211603",
-  },
-  {
-    title: "Learning Cloud Computing: Serverless Computing (2018)",
-    issuer: "LinkedIn Learning",
-    issued: "Sep 2020",
-    url: "https://linkedin.com/learning/certificates/9abc82aad0163a2c2555e2976d00602721ecda1dc3f261e493111bd5d37655b8",
-  },
-  {
-    title: "Python Data Analysis",
-    issuer: "LinkedIn Learning",
-    issued: "Sep 2020",
-    url: "https://linkedin.com/learning/certificates/50cb6713696e37e72a282d2360baf0b4e5b09e2e8b1a6be294e7c0309f45ee75",
-  },
-  {
-    title: "Advanced PHP",
-    issuer: "LinkedIn Learning",
-    issued: "Aug 2020",
-    url: "https://linkedin.com/learning/certificates/0b0aea138f3947bc63c77ad8e85fb4c89ec8f01af6d6e51e2119295080d623aa",
-  },
-];
+const MONTHS = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
 
 function slugify(title) {
   return title
@@ -89,73 +23,102 @@ function slugify(title) {
     .slice(0, 60);
 }
 
+function parseDate(s) {
+  if (!s) return 0;
+  const m = s.match(/^([A-Za-z]{3})\s+(\d{4})$/);
+  if (!m) return 0;
+  return new Date(Number(m[2]), MONTHS[m[1]] ?? 0, 1).getTime();
+}
+
+function cleanUrl(url, credentialId, title) {
+  if (url && url.includes("linkedin.com/safety/go")) {
+    const m = url.match(/[?&]url=([^&]+)/);
+    if (m) {
+      try {
+        return decodeURIComponent(m[1]);
+      } catch {
+        /* fall through */
+      }
+    }
+  }
+  if (url && !url.startsWith("url?id=") && url.startsWith("http")) return url.split("?")[0].replace(/\?$/, "") || url;
+  if (credentialId) {
+    const isSpec = /specialization|foundations|principles and practices/i.test(title + url);
+    const kind = isSpec || (url && url.includes("specialization")) ? "specialization" : "records";
+    return `https://www.coursera.org/account/accomplishments/${kind}/${credentialId}`;
+  }
+  return url && url.startsWith("http") ? url : "";
+}
+
+function issuerLabel(issuer) {
+  if (/^linkedin$/i.test(issuer)) return "LinkedIn Learning";
+  if (/university of california/i.test(issuer)) return "UC Irvine";
+  if (/queen mary/i.test(issuer)) return "Queen Mary University";
+  if (/google deepmind/i.test(issuer)) return "Google DeepMind";
+  if (/google cloud/i.test(issuer)) return "Google Cloud";
+  if (/^google$/i.test(issuer)) return "Google";
+  if (/^adobe$/i.test(issuer)) return "Adobe";
+  if (/skillup/i.test(issuer)) return "SkillUp";
+  return issuer;
+}
+
+function platform(issuer, url) {
+  if (/linkedin/i.test(issuer) || /linkedin\.com\/learning/i.test(url || "")) return "linkedin";
+  return "coursera";
+}
+
 function toItem(raw, i) {
-  const title = raw.title || raw.Name || raw["Certification Name"] || "";
-  const issuer = raw.issuer || raw.Authority || raw["Issuing Organization"] || "LinkedIn Learning";
-  const issued = raw.issued || raw["Started On"] || raw["Issue Date"] || "";
-  const url = raw.url || raw.Url || raw["Certification URL"] || "";
-  const topic = topicForTitle(title);
+  const title = raw.title || "";
+  const issuer = raw.issuer || "";
+  const issued = raw.issued_date || raw.issued || "";
+  const url = cleanUrl(raw.credential_url || raw.url || "", raw.credential_id, title);
+  const skills = raw.skills || [];
   return {
     id: slugify(title) || `cert-${i + 1}`,
     title,
-    issuer,
+    issuer: issuerLabel(issuer),
     issued,
     url,
-    topic,
-    size: SIZES_CYCLE[i % SIZES_CYCLE.length],
+    credential_id: raw.credential_id || null,
+    skill: skills[0] || "",
+    platform: platform(issuer, url),
+    size: "landscape",
     cover: "",
+    _sort: parseDate(issued),
   };
-}
-
-function parseCsv(text) {
-  const lines = text.trim().split(/\r?\n/);
-  if (lines.length < 2) return [];
-  const headers = lines[0].split(",").map((h) => h.trim().replace(/^"|"$/g, ""));
-  return lines.slice(1).map((line) => {
-    const cols = [];
-    let cur = "";
-    let inQ = false;
-    for (const ch of line) {
-      if (ch === '"') inQ = !inQ;
-      else if (ch === "," && !inQ) {
-        cols.push(cur.trim());
-        cur = "";
-      } else cur += ch;
-    }
-    cols.push(cur.trim());
-    const row = {};
-    headers.forEach((h, i) => {
-      row[h] = (cols[i] || "").replace(/^"|"$/g, "");
-    });
-    return row;
-  });
-}
-
-function writeJson(items) {
-  const data = {
-    summary: `${items.length} professional certification${items.length === 1 ? "" : "s"}`,
-    items,
-  };
-  fs.writeFileSync(OUT, `${JSON.stringify(data, null, 2)}\n`);
-  console.log(`Wrote ${items.length} certs to ${OUT}`);
 }
 
 function main() {
   const args = process.argv.slice(2);
-  if (args.includes("--seed") || args.length === 0) {
-    writeJson(SEED.map((r, i) => toItem(r, i)));
-    return;
+  const fileIdx = args.indexOf("--file");
+  const src = fileIdx !== -1 ? path.resolve(args[fileIdx + 1]) : SOURCE;
+
+  if (!fs.existsSync(src)) {
+    console.error(`Source not found: ${src}`);
+    process.exit(1);
   }
-  const idx = args.indexOf("--export");
-  if (idx !== -1 && args[idx + 1]) {
-    const csvPath = args[idx + 1];
-    const text = fs.readFileSync(csvPath, "utf8");
-    const rows = parseCsv(text).filter((r) => r.Name || r.title || r["Certification Name"]);
-    writeJson(rows.map((r, i) => toItem(r, i)));
-    return;
-  }
-  console.error("Usage: node scripts/import-certs.mjs --seed | --export path/to/Certifications.csv");
-  process.exit(1);
+
+  const raw = JSON.parse(fs.readFileSync(src, "utf8"));
+  const list = Array.isArray(raw) ? raw : raw.items || [];
+  const seen = new Map();
+  const items = list
+    .map((r, i) => toItem(r, i))
+    .sort((a, b) => b._sort - a._sort)
+    .map(({ _sort, ...c }) => {
+      const base = c.id;
+      const n = seen.get(base) || 0;
+      seen.set(base, n + 1);
+      if (n > 0) c.id = `${base}-${n}`;
+      return c;
+    });
+
+  const data = {
+    summary: `${items.length} professional certifications & credentials`,
+    items,
+  };
+
+  fs.writeFileSync(OUT, `${JSON.stringify(data, null, 2)}\n`);
+  console.log(`Imported ${items.length} certs → ${OUT}`);
 }
 
 main();
